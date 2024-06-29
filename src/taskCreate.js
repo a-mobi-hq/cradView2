@@ -402,21 +402,25 @@ const CreateTask = () => {
               </div>
 
               <div className='col-md-2'>
-              <OrangeCheckbox
+              <input 
+                type="checkbox" 
                 label="Questions"
                 name="terms"
                 checked={isChecked} // Bind checked attribute to state
                 onChange={handleCheckboxChange}
               />
+              <span style={{paddingLeft:10}}>Questions</span>
               </div>
 
               <div className='col-md-2'>
-              <OrangeCheckbox
+              <input 
+                type="checkbox" 
                 label="Uploads"
                 name="terms"
                 checked={isCheckedU} // Bind checked attribute to state
                 onChange={handleCheckboxChangeU}
               />
+              <span style={{paddingLeft:10}}>Upload</span>
                </div>
 
               
