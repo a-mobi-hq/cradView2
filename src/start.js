@@ -55,12 +55,20 @@ function InflationRateGraph({projectId, graphType }) {
     navigate('/kpi');
   };
 
+  const handleClickI = () => {
+    navigate('/questionBapEs');
+  };
+
   const handleClickCh = () => {
     navigate('/generalSetting');
   };
 
   const handleClickC = () => {
     navigate('/craddule');
+  };
+
+  const handleClickSP = () => {
+    navigate('/sharePhase');
   };
 
   const handleClickUp = () => {
@@ -154,7 +162,7 @@ function InflationRateGraph({projectId, graphType }) {
                 </div>
 
                 <div className="col-md-3">
-                    <div className="caseBA2">
+                    <div className="caseBA2" onClick={handleClickI}>
                         <p className="caseBA2PV">View</p>
                         <p className="caseBA2P">Product Definition</p>
                         <p className="caseBA2P2">Design your business processes and flow</p>
@@ -162,7 +170,7 @@ function InflationRateGraph({projectId, graphType }) {
                         <p className="caseBA2P2">5 Documents</p>
                     </div>
                 </div>
-
+                
                 <div className="col-md-3">
                     <div className="caseBA3" onClick={handleClickP}>
                         <p className="caseBA3PV">View</p>
@@ -309,6 +317,30 @@ function InflationRateGraph({projectId, graphType }) {
                     </div>
                 </div>
             </div>
+
+            <div className="col-md-12">
+                    <div className="innerStart2">
+                        <div style={{padding:37}}>
+                            <p className="ttas">Share Phases</p>
+                            <div className="row">
+                                <div className="col-md-3">
+                                    <p style={{marginBottom:0, fontSize:13}}>You Feel your file is ready</p>
+                                    <p style={{marginBottom:0, fontSize:13}}>For review</p>
+                                </div>
+
+                                <div className="col-md-9">
+                                    <div className="upgi" onClick={handleClickSP}>
+                                        <p style={{marginBottom:0, color:"#fff"}}>Review</p>
+                                        
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                      
+                    </div>
+                </div>
 
             
             <div className="row">

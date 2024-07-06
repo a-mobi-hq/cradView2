@@ -19,6 +19,7 @@ const phaseNames = [
 
 function PageShare() {
   const [share, setShare] = useState([]);
+  const [shareProject, setShareProject] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [circles, setCircles] = useState(new Array(6).fill(false));
 
@@ -32,7 +33,7 @@ function PageShare() {
   
     try {
       console.log(userId);
-      const response = await fetch(`${API_BASE_URL}/api/share/review/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/share/give/${id}`, {
         headers: {
           'Content-Type': 'application/json',
            'Authorization': `Bearer ${access_token}` // Include the token in the Authorization header
@@ -43,8 +44,10 @@ function PageShare() {
       console.log("here");
       if (response.status === 200) {
         const data = await response.json();
-        console.log(data.data);
+        console.log(data);
         setShare(data.data);
+        setShareProject(data.data.projectId._id);
+        console.log(data.data.projectId._id);
         
       }else{
         const result = await response.json();
@@ -78,21 +81,19 @@ function PageShare() {
               </div>
               <div className='BoxPhase1'>
                 <p className='centerH1v'>Phase</p>
-                {share && share.length > 0 && share.map((item, itemIndex) => (
-                      item.phases && item.phases.length > 0 && item.phases.map((phase, phaseIndex) => (
-                        <a 
-                          key={`${item._id}-${phaseIndex}`} 
-                          href={`${API_BASE_WEB_URL}/shareview/${id}/${phase}`} 
-                          style={{ textDecoration: 'none' }}
-                        >
-                          <div className='BoxPhase'>
-                            <div className='boxView'>
-                              <p className='heading'>{phase}</p>
-                            </div>
-                          </div>
-                        </a>
-                      ))
-                  ))}
+                {share.phases && share.phases.length > 0 && share.phases.map((phase, phaseIndex) => (
+            <a 
+                key={`${share._id}-${phaseIndex}`} 
+                href={`${API_BASE_WEB_URL}/shareview/${shareProject}/${phase}`} 
+                style={{ textDecoration: 'none' }}
+            >
+                <div className='BoxPhase'>
+                    <div className='boxView'>
+                        <p className='heading'>{phase}</p>
+                    </div>
+                </div>
+            </a>
+        ))}
 
                 
               

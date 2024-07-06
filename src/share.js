@@ -7,6 +7,7 @@ import { Toaster, toast } from 'sonner'
 import API_BASE_URL from './config/apiConfig';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+import { useParams } from 'react-router-dom';
 function SignUp() {
 
   const location = useLocation();
@@ -14,7 +15,7 @@ function SignUp() {
   // Construct the full URL
   const link = `${window.location.origin}${location.pathname}${location.search}${location.hash}`;
   console.log(link);
- 
+  const access_token = localStorage.getItem('access_token');
     const [showPassword, setShowPassword] = useState(false);
 
     const [showCPassword, setShowCPassword] = useState(false);
@@ -23,7 +24,8 @@ function SignUp() {
     const handleTogglePassword = () => {
       setShowPassword(!showPassword);
     };
-
+    const { id } = useParams();
+    console.log(id);
     const handleToggleCPassword = () => {
       setShowCPassword(!showCPassword);
     };
@@ -44,6 +46,7 @@ function SignUp() {
         phoneNumber: '',
         speciality: '',
         experience: '',
+        uniqueCode: id,
       });
     
       const handleChange = (e) => {
@@ -74,6 +77,7 @@ function SignUp() {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
+              'Authorization': `Bearer ${access_token}`,
             },
             body: JSON.stringify(data),
           });

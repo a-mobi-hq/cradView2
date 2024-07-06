@@ -181,10 +181,12 @@ function SectionIntroShare ({ htmlContent })  {
                 <p className='centerH'>Give Feedback</p>
                 
                 </div>
+
    
             <button className="btn btn-primary buttonE" onClick={createFeedBack}>
                
-            Give Feedback
+             { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
+                { !loading && <span>Give Feedback</span>}
             </button>
           
             <div class = "break"></div>

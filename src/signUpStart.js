@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import { useParams } from 'react-router-dom';
 import { useNavigate,useLocation } from 'react-router-dom';
 import { text } from '@fortawesome/fontawesome-svg-core';
 import { Toaster, toast } from 'sonner'
@@ -21,7 +22,8 @@ function SignUp() {
 
     const [showCPassword, setShowCPassword] = useState(false);
     
-  
+    const { id } = useParams();
+
     const handleTogglePassword = () => {
       setShowPassword(!showPassword);
     };
@@ -32,7 +34,6 @@ function SignUp() {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
     const onClickHandler = () => navigate(`/login`)
-
 
     //Register
 
@@ -47,6 +48,7 @@ function SignUp() {
         password: '',
         cpassword: '',
         link:newLink,
+        uniqueCode:id,
       });
     
       const handleChange = (e) => {
