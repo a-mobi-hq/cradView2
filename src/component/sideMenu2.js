@@ -18,6 +18,12 @@ const SideMenu2 = () => {
   const navigate = useNavigate();
   const onClickCF = () => navigate(`/customFinancial`);
 
+  const onClickCB = () => navigate(`/questionBus`);
+
+  const onClickCG = () => navigate(`/go`);
+
+  const onClickCH = () => navigate(`/start`);
+
   const updateStreak = async () => {
     try {
      const projectId = localStorage.getItem('nProject');
@@ -52,7 +58,13 @@ const SideMenu2 = () => {
             <span className='menuHeader'>Ideation</span>
         </div>
        )}
-        <li>
+
+        <li onClick={onClickCH}> 
+          <CiBoxes />
+          {!isCollapsed && <span>Home</span>}
+        </li>
+
+        <li onClick={onClickCB}> 
           <CiBoxes />
           {!isCollapsed && <span>Business Case Builder</span>}
         </li>
@@ -62,16 +74,16 @@ const SideMenu2 = () => {
           {!isCollapsed && <span>Custom Financial Projection</span>}
         </li>
 
-        <li>
+        <li onClick={onClickCG}>
         <CiGrid2V />
           {!isCollapsed && <span>Go no Go</span>}
         </li>
 
-        <li>
+        {/* <li>
 
           <CiViewTimeline />
           {!isCollapsed && <span>Timeline Builder</span>}
-        </li>
+        </li> */}
         
         <li>
             <CiServer />
@@ -84,7 +96,7 @@ const SideMenu2 = () => {
             <p style={{paddingTop:0}}>Account</p>
         </div>
         )}
-        <li>
+        {/* <li>
           <FontAwesomeIcon icon={faCog} />
           {!isCollapsed && <span>Change Password</span>}
         </li>
@@ -92,7 +104,7 @@ const SideMenu2 = () => {
         <li>
           <FontAwesomeIcon icon={faCog} />
           {!isCollapsed && <span>Edit Profile</span>}
-        </li>
+        </li> */}
 
         <li>
           <FontAwesomeIcon icon={faCog} />

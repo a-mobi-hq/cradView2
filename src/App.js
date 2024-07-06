@@ -28,6 +28,33 @@ import QuestionBusCo from './questionBusCo';
 import QuestionBusCon from './questionBusCon';
 import QuestionBapEs from './questionBapEs';
 import QuestionBapCs from './questionBapCs';
+import QuestionVppVs from './questionVppVs';
+import QuestionVppPd from './questionVppPd';
+import QuestionVppPe from './questionVppPe';
+import QuestionVppVd from './questionVppVd';
+import QuestionVppPs from './questionVppPs';
+import QuestionVppVp from './questionVppVp';
+import QuestionVppFc from './questionVppFc';
+import QuestionVppVc from './questionVppVc';
+import QuestionVppC from './questionVppC';
+import QuestionSucIo from './questionSucIo';
+import QuestionSucDc from './questionSucDc';
+import QuestionSucAw from './questionSucAw';
+import QuestionSucDm from './questionSucDm';
+import QuestionSucEp from './questionSucEp';
+import QuestionSucCr from './questionSucCr';
+import QuestionSucIi from './questionSucIi';
+import QuestionDmaMa from './questionDmaMa';
+import QuestionDmaMo from './questionDmaMo';
+import QuestionDmaPm from './questionDmaPm';
+import QuestionDmaMm from './questionDmaMm';
+import QuestionDmaMc from './questionDmaMc';
+import QuestionDmaMt from './questionDmaMt';
+import QuestionDmaMn from './questionDmaMn';
+import QuestionDmaBa from './questionDmaBa';
+import QuestionDmaIp from './questionDmaIp';
+import QuestionDmaRm from './questionDmaRm';
+import QuestionDmaRo from './questionDmaRo';
 
 import ExecutiveSummarys from './executiveSummarys';
 import QuestionBusIntro from './quesBusIntro';
@@ -41,6 +68,34 @@ import QuestionBusInSum from './quesBusInSum';
 import QuestionBusConSum from './quesBusConSum';
 import QuestionBapCsSum from './quesBapCsSum';
 import QuestionBapEsSum from './quesBapEsSum';
+import QuestionVppVsSum from './quesVppVsSum';
+import QuestionVppPdSum from './quesVppPdSum';
+import QuestionVppPeSum from './quesVppPeSum';
+import QuestionVppVdSum from './quesVppVdSum';
+import QuestionVppPsSum from './quesVppPsSum';
+import QuestionVppVpSum from './quesVppVpSum';
+import QuestionVppFcSum from './quesVppFcSum';
+import QuestionVppVcSum from './quesVppVcSum';
+import QuestionVppCSum from './quesVppCSum';
+import QuestionSucIoSum from './quesSucIoSum';
+import QuestionSucDcSum from './quesSucDcSum';
+import QuestionSucAwSum from './quesSucAwSum';
+import QuestionSucDmSum from './quesSucDmSum';
+import QuestionSucEpSum from './quesSucEpSum';
+import QuestionSucCrSum from './quesSucCrSum';
+import QuestionSucIiSum from './quesSucIiSum';
+import QuestionDmaMaSum from './quesDmaMaSum';
+import QuestionDmaMoSum from './quesDmaMoSum';
+import QuestionDmaPmSum from './quesDmaPmSum';
+import QuestionDmaMmSum from './quesDmaMmSum';
+import QuestionDmaMcSum from './quesDmaMcSum';
+import QuestionDmaMtSum from './quesDmaMtSum';
+import QuestionDmaMnSum from './quesDmaMnSum';
+import QuestionDmaBaSum from './quesDmaBaSum';
+import QuestionDmaIpSum from './quesDmaIpSum';
+import QuestionDmaRmSum from './quesDmaRmSum';
+import QuestionDmaRoSum from './quesDmaRoSum';
+
 import ProblemStatement from './problemstatement';
 import PageBenefit from './pageBenefit';
 import InflationRateGraph from './inflationRateGraph';
@@ -197,6 +252,9 @@ import Craddule from './craddule';
 import CradduleType from './cradduleFile';
 import PitchDeckUpload from './pitchDeckUpload';
 import PitchDeckView from './pitchDeckView';
+import TeamView from './teamView';
+import TeamAdd from './teamAdd';
+import SharePhase from './sharePhase';
 
 function App() {
   return (
@@ -217,6 +275,35 @@ function App() {
         <Route path="/questionBusCon" element= {<QuestionBusCon />} />
         <Route path="/questionBapEs" element= {<QuestionBapEs />} />
         <Route path="/questionBapCs" element= {<QuestionBapCs />} />
+        <Route path="/questionVppVs" element= {<QuestionVppVs />} />
+        <Route path="/questionVppPd" element= {<QuestionVppPd />} />
+        <Route path="/questionVppPe" element= {<QuestionVppPe />} />
+        <Route path="/questionVppVd" element= {<QuestionVppVd />} />
+        <Route path="/questionVppPs" element= {<QuestionVppPs />} />
+        <Route path="/questionVppVp" element= {<QuestionVppVp />} />
+        <Route path="/questionVppFc" element= {<QuestionVppFc />} />
+        <Route path="/questionVppVc" element= {<QuestionVppVc />} />
+        <Route path="/questionVppC" element= {<QuestionVppC />} />
+        <Route path="/questionSucIo" element= {<QuestionSucIo/>} />
+        <Route path="/questionSucDc" element= {<QuestionSucDc/>} />
+        <Route path="/questionSucAw" element= {<QuestionSucAw/>} />
+        <Route path="/questionSucDm" element= {<QuestionSucDm/>} />
+        <Route path="/questionSucEp" element= {<QuestionSucEp/>} />
+        <Route path="/questionSucCr" element= {<QuestionSucCr/>} />
+        <Route path="/questionSucIi" element= {<QuestionSucIi/>} />
+        <Route path="/questionDmaMa" element= {<QuestionDmaMa/>} />
+        <Route path="/questionDmaMo" element= {<QuestionDmaMo/>} />
+        <Route path="/questionDmaPm" element= {<QuestionDmaPm/>} />
+        <Route path="/questionDmaMm" element= {<QuestionDmaMm/>} />
+        <Route path="/questionDmaMc" element= {<QuestionDmaMc/>} />
+        <Route path="/questionDmaMt" element= {<QuestionDmaMt/>} />
+        <Route path="/questionDmaMn" element= {<QuestionDmaMn/>} />
+        <Route path="/questionDmaBa" element= {<QuestionDmaBa/>} />
+        <Route path="/questionDmaIp" element= {<QuestionDmaIp/>} />
+        <Route path="/questionDmaRm" element= {<QuestionDmaRm/>} />
+        <Route path="/questionDmaRo" element= {<QuestionDmaRo/>} />
+
+
         <Route path="/marketAnalysis" element= {<MarketAnalysis />} />
         <Route path="/ExecutiveSummary" element= {<ExecutiveSummary />} />
         <Route path="/executiveSummarys" element= {<ExecutiveSummarys />} />
@@ -231,6 +318,37 @@ function App() {
         <Route path="/questionBusConSum" element= {<QuestionBusConSum />} />
         <Route path="/questionBapEsSum" element= {<QuestionBapEsSum />} />
         <Route path="/questionBapCsSum" element= {<QuestionBapCsSum />} />
+        <Route path="/questionBapCsSum" element= {<QuestionBapCsSum />} />
+        <Route path="/questionVppVsSum" element= {<QuestionVppVsSum />} />
+        <Route path="/questionVppPdSum" element= {<QuestionVppPdSum />} />
+        <Route path="/questionVppPeSum" element= {<QuestionVppPeSum />} />
+        <Route path="/questionVppVdSum" element= {<QuestionVppVdSum />} />
+        <Route path="/questionVppPsSum" element= {<QuestionVppPsSum />} />
+        <Route path="/questionVppVpSum" element= {<QuestionVppVpSum />} />
+        <Route path="/questionVppFcSum" element= {<QuestionVppFcSum />} />
+        <Route path="/questionVppVcSum" element= {<QuestionVppVcSum />} />
+        <Route path="/questionVppCSum" element= {<QuestionVppCSum />} />
+        <Route path="/questionSucIoSum" element= {<QuestionSucIoSum />} />
+        <Route path="/questionSucDcSum" element= {<QuestionSucDcSum />} />
+        <Route path="/questionSucAwSum" element= {<QuestionSucAwSum />} />
+        <Route path="/questionSucDmSum" element= {<QuestionSucDmSum />} />
+        <Route path="/questionSucEpSum" element= {<QuestionSucEpSum />} />
+        <Route path="/questionSucCrSum" element= {<QuestionSucCrSum />} />
+        <Route path="/questionSucIiSum" element= {<QuestionSucIiSum />} />
+        <Route path="/questionDmaMaSum" element= {<QuestionDmaMaSum />} />
+        <Route path="/questionDmaMoSum" element= {<QuestionDmaMoSum />} />
+        <Route path="/questionDmaPmSum" element= {<QuestionDmaPmSum />} />
+        <Route path="/questionDmaMmSum" element= {<QuestionDmaMmSum />} />
+        <Route path="/questionDmaMcSum" element= {<QuestionDmaMcSum />} />
+        <Route path="/questionDmaMtSum" element= {<QuestionDmaMtSum />} />
+        <Route path="/questionDmaMnSum" element= {<QuestionDmaMnSum />} />
+        <Route path="/questionDmaBaSum" element= {<QuestionDmaBaSum />} />
+        <Route path="/questionDmaIpSum" element= {<QuestionDmaIpSum />} />
+        <Route path="/questionDmaRmSum" element= {<QuestionDmaRmSum />} />
+        <Route path="/questionDmaRoSum" element= {<QuestionDmaRoSum />} />
+
+
+
        
         <Route path="/trackPage" element= {<TrackPage />} />
         <Route path="/progress" element= {<Progress />} />
@@ -392,6 +510,9 @@ function App() {
             <Route path="/kpiview/:id" element= {<KpiView />} />
             <Route path="/craddule/" element= {<Craddule />} />
             <Route path="/types/:id" element= {<CradduleType />} />
+            <Route path="/teamView/" element= {<TeamView />} />
+            <Route path="/teamAdd/" element= {<TeamAdd />} />
+            <Route path="/sharePhase/" element= {<SharePhase />} />
       </Routes>
     </Router>
   );

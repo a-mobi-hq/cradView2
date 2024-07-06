@@ -14,16 +14,26 @@ export default function ShareModal ({open, onClose, circles, phaseNames})  {
   const [loading, setLoading] = useState(false);
   const [link, setLink] = useState('');
   const navigate = useNavigate()
+  const projectId = localStorage.getItem('nProject');
+  const [formData, setFormData] = useState({
+    email: '',
+    projectId: projectId,
+    link: ''
+  });
 
   const onClickHandler = () => navigate(`/shareFile`)
  if(!open) return null
 
- const projectId = localStorage.getItem('nProject');
+ 
     const token = localStorage.getItem('access_token'); 
     const decodedToken = jwtDecode(token);
     const userId = decodedToken.userId;
+
+    
+    
     
 
+    
  const share = async () => {
   setLoading(true);
   try {
@@ -72,10 +82,74 @@ const copyToClipboard = () => {
   });
 };
 
+const createReview = async (data) => {
+  setLoading(true);
+
+  try {
+    const timestamp = new Date().getTime();
+    const randomString = Math.random().toString(36).substring(2, 8);
+    const uniqueCode = timestamp.toString() + randomString;
+    const link = "/share/start/" + uniqueCode;
+
+    console.log(link);
+
+    const phases = circles
+    .map((isFilled, index) => (isFilled ? phaseNames[index] : null))
+    .filter(phase => phase !== null);
+
+
+    const updatedFormData = {
+      ...data,
+      link: link,
+      uniqueCode: uniqueCode,
+      projectId: projectId,
+      email: data.email,
+      phases:phases,
+    };
+
+    const response = await fetch(API_BASE_URL + '/api/share/review', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify(updatedFormData),
+    });
+
+    if (response.status === 200) {
+      setLoading(false);
+      console.log(response);
+      setLink(API_BASE_WEB_URL + link);
+    } else {
+      const result = await response.json();
+      setLoading(false);
+      console.error('Error:', result['error']);
+    }
+  } catch (error) {
+    setLoading(false);
+    console.error('An error occurred:', error);
+  }
+};
+
+const handleSubmit = (e) => {
+e.preventDefault();
+
+createReview(formData);
+
+};
+
 const handleClose = () => {
   setLink('');
   onClose();
 };
+
+const handleChange = (e) => {
+  setFormData({
+    ...formData,
+    [e.target.id]: e.target.value,
+  });
+};
+
  return ReactDOM.createPortal (
   <>
         <div className='modalOv' >
@@ -94,12 +168,45 @@ const handleClose = () => {
                 </p>
                 )}
                <div className='text-center'>
+
+               <form onSubmit={handleSubmit}>
+              <div className='emailInvite1'>
+                <div className='enterEmail'>
+                <p className='email2'>Email</p>
+                <input 
+                  type="text" 
+                  className='enterE2' 
+                  placeholder="Email"
+                  id="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                ></input>
+                {/*<textarea className='enterE'></textarea>*/}
+                </div>
+
+
+               
+               
+
+                </div>
+
+                
+
+               
+           
                
             <button className="btn btn-primary curveSb shreB" onClick={share}>
              
               { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
                 { !loading && <span> Create Link</span>}
               </button>
+
+              <button className="btn btn-primary curveSb shreB" typeof='submit' style={{marginLeft:5}}>
+             
+              { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
+                { !loading && <span> Send To Email</span>}
+              </button>
+              </form>
            </div>
            {/* <ViewSharedModal open={isOpen} onClose={() => setIsOpen(false)}>
 

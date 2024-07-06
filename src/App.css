@@ -1615,6 +1615,14 @@ hr{
   padding: 10px;
 }
 
+.enterE2{
+
+  border-radius: 5px;
+  outline: none;
+  padding: 10px;
+  padding: 5px 7px;
+  border: 1px solid #eee;
+}
 .input{
   border-radius: 15px;
   width: 50%;
@@ -1648,6 +1656,12 @@ hr{
 .email{
   margin-left: 50px !important;
   margin-bottom: 0px !important;
+}
+
+
+.email2{
+  margin-bottom: 5px !important;
+  margin-top: 5px !important;
 }
 
 .buttonSelect{
@@ -2115,8 +2129,12 @@ hr{
 
 .BoxPhase1{
   margin-top: 50px;
-  padding: 0px 50px 0px 50px;
-  margin-bottom: 20px;
+    padding: 0px 50px 0px 50px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-radius: 15px;
 }
 
 .BoxPhase{
@@ -2208,7 +2226,6 @@ hr{
   margin-top: 15PX;
   margin-right: 25px;
   margin-left: 25px;
-  height: 430px;
   border-radius: 3px !important;
 }
 
