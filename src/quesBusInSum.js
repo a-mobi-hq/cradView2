@@ -78,36 +78,49 @@ function QuestionBusIntro() {
  }, []);
 
  useEffect(() => {
-   const fetchAnswers = async () => {
-     try {
-       const summaryResponse = await fetch(API_BASE_URL + `/api/summary/${projectId}/${questionType}/${questionSubType}`, {
-           headers: {
-             'Content-Type': 'application/json', 
-             'Authorization': `Bearer ${token}` // Include the token in the request headers
-           }
-         });
-       
-     if(summaryResponse.ok) {
-       // If summary exists, fetch the summary data
-       const dataS = await summaryResponse.json();
+  const fetchAnswers = async () => {
+    try {
+      const summaryResponse = await fetch(API_BASE_URL + `/api/summary/${projectId}/${questionType}/${questionSubType}`, {
+          headers: {
+            'Content-Type': 'application/json', 
+            'Authorization': `Bearer ${token}` // Include the token in the request headers
+          }
+        });
+      
+    if(summaryResponse.status === 200) {
+     console.log("getting");
+      // If summary exists, fetch the summary data
+      const dataS = await summaryResponse.json();
+      
+      if (dataS.data === null) {
+         console.log("in next step")
+         const response = await fetch(API_BASE_URL + `/api/new/question/${questionType}/${questionSubType}/${projectId}`);
+         if (!response.ok) {
+           throw new Error('Failed to fetch answers');
+         }
+         const data = await response.json();
+         console.log(data);
+         setAnswers(data.data);
+         setLoading(false);
+
+      }else{
        console.log(dataS);
        console.log(dataS.data.summary);
        setCombinedAnswer(dataS.data.summary);
-    } else {
-       const response = await fetch(API_BASE_URL + `/api/new/question/BusinessCaseBuilder/InternalGovernanceAndApprovalProcess/${projectId}`);
-       if (!response.ok) {
-         throw new Error('Failed to fetch answers');
-       }
-       const data = await response.json();
-       console.log(data);
-       setAnswers(data.data);
-       setLoading(false);
-   }
-     } catch (error) {
-       setError(error.message);
-       setLoading(false);
-     }
-   };
+      }
+    }else{
+     const result = await summaryResponse.json();
+     setLoading(false);
+     toast.error(result['error']);
+     console.error('Error:', result['error']);
+    }
+     
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
+  };
+
 
    fetchAnswers();
  }, [questionType, questionSubType, projectId]);

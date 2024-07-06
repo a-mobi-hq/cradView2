@@ -3,7 +3,7 @@ import bci from './images/bc.png';
 import bro from './images/bro.png'; 
 import Header from './component/header';
 import Menu from './component/menu';
-import SideMenu2 from './component/sideMenu2';
+import SideMenu2P from './component/sideMenu2P';
 import API_BASE_URL from './config/apiConfig';
 import { useNavigate } from 'react-router-dom';
 import { Toaster, toast } from 'sonner';
@@ -27,6 +27,9 @@ function QuestionBus() {
     const [loading, setLoading] = useState(false);
     console.log(userId);
 
+    const questionType ="ValuePropositionPack";
+    const questionSubType ="FeedbackMechanism";
+
     const [showScrollableDiv, setShowScrollableDiv] = useState(false);
 
     const handleToggle = () => {
@@ -46,12 +49,12 @@ function QuestionBus() {
 
     const fetchUnansweredQuestion = async () => {
         try {
-          const response = await fetch(API_BASE_URL+`/api/new/question/${userId}/${projectId}/ValuePropositionPack/ValueCommunicationPlan`);
+          const response = await fetch(API_BASE_URL+`/api/new/question/${userId}/${projectId}/ValuePropositionPack/FeedbackMechanism`);
           if (response.status === 200) {
             const data = await response.json();
             if (!data.data) {
             //   setNoMoreQuestions(true);
-                navigate(`/questionVppPdSum`);
+                navigate(`/questionVppFcSum`);
             } else {
               setQuestion(data.data);
             }
@@ -127,14 +130,14 @@ function QuestionBus() {
       
 
     <div className='container2'>
-         <SideMenu2 />    
+         <SideMenu2P />    
          <div className="main-content">
         
          <Header />
          <div className={`main-content2 ${showScrollableDiv ? 'shrink' : ''}`}>
 
          <div className='text-center'>
-                    <p className='textHp'>Value Communication Plan</p>
+                    <p className='textHp'>Feedback Mechanism</p>
                     <p className='textH'>Make sure you answer all questions</p>
                 </div>
             

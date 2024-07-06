@@ -88,22 +88,34 @@ function QuestionBusIntro() {
            }
          });
        
-     if(summaryResponse.ok) {
+     if(summaryResponse.status === 200) {
+      console.log("getting");
        // If summary exists, fetch the summary data
        const dataS = await summaryResponse.json();
-       console.log(dataS);
-       console.log(dataS.data.summary);
-       setCombinedAnswer(dataS.data.summary);
-    } else {
-       const response = await fetch(API_BASE_URL + `/api/new/question/BusinessCaseBuilder/Introduction/${projectId}`);
-       if (!response.ok) {
-         throw new Error('Failed to fetch answers');
+       
+       if (dataS.data === null) {
+          console.log("in next step")
+          const response = await fetch(API_BASE_URL + `/api/new/question/BusinessCaseBuilder/Introduction/${projectId}`);
+          if (!response.ok) {
+            throw new Error('Failed to fetch answers');
+          }
+          const data = await response.json();
+          console.log(data);
+          setAnswers(data.data);
+          setLoading(false);
+
+       }else{
+        console.log(dataS);
+        console.log(dataS.data.summary);
+        setCombinedAnswer(dataS.data.summary);
        }
-       const data = await response.json();
-       console.log(data);
-       setAnswers(data.data);
-       setLoading(false);
-   }
+     }else{
+      const result = await summaryResponse.json();
+      setLoading(false);
+      toast.error(result['error']);
+      console.error('Error:', result['error']);
+     }
+      
      } catch (error) {
        setError(error.message);
        setLoading(false);
