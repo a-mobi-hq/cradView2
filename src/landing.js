@@ -59,6 +59,7 @@ function LandingPage() {
 
   const [teamMembers, setTeamMembers] = useState([]);
 const [projects, setProjects] = useState([]);
+const [reviewProjects, setReviewProjects] = useState([]);
 const [share, setShare] = useState([]);
 
 const access_token = localStorage.getItem('access_token');
@@ -82,6 +83,35 @@ const fetchTeamProjects= async () => {
       console.log(data.data);
       setTeamMembers(data.data);
       console.log(teamMembers)
+    }else{
+      const result = await response.json();
+      console.error('Error:', result['error']);
+    }
+   
+  } catch (err) {
+   
+    console.log(err);
+  }
+};
+
+const fetchReviewProjects= async () => {
+  try {
+    console.log(userId);
+    const response = await fetch(`${API_BASE_URL}/api/share/user/${userId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+         'Authorization': `Bearer ${access_token}` // Include the token in the Authorization header
+      }
+    });
+    
+    console.log("here");
+    console.log("here");
+    if (response.status === 200) {
+      const data = await response.json();
+      console.log("review");
+      console.log(data.data);
+      setReviewProjects(data.data);
+      console.log(reviewProjects)
     }else{
       const result = await response.json();
       console.error('Error:', result['error']);
@@ -155,10 +185,20 @@ const handleProjectClick = (projectId) => {
   navigate(`/start`);
 };
 
+const handleProjectTeamClick = (projectId) => {
+  localStorage.setItem('nProject', projectId);
+  navigate(`/start`);
+};
+
+const handleProjectReviowClick = (reviewId) => {
+  localStorage.setItem('nReview', reviewId);
+  navigate(`/sharereview/${reviewId}`);
+};
+
  useEffect(() => {
   fetchTeamProjects();
   fetchUserProjects();
-  fetchSharedProjects();
+  fetchReviewProjects();
         // const wow = new WOW.WOW();
         // wow.init();
       }, []);
@@ -185,25 +225,9 @@ const handleProjectClick = (projectId) => {
   
  
   <div className='col-md-6'>
-    <div className='row'>
-    {teamMembers.map(member => (
-      <div className='col-md-6'>
-      <a href={`/sharereview/${member.projectId}`} className='team-member-link'> {/* Anchor tag for navigation */}
-        <div className='centerD'>
-            <p className='pna'>{member.projectDetails.project}</p>
-            <progress value={progress} max="100"></progress>
-            <p className='pna2'>Job is 40% done</p>
-            <div class="proTeam">
-                      <img src={p3} alt="Circular Image" className="circular-image-top"/>
-                  </div>
 
-                  <div class="proTeam">
-                      <img src={p2} alt="Circular Image" className="circular-image-top"/>
-                  </div>
-          </div> 
-          </a>
-        </div>
-      ))}
+      <p>Your Projects</p>
+      <div className='row'>
 
       {projects.map(member => (
        
@@ -226,6 +250,51 @@ const handleProjectClick = (projectId) => {
         ))}
 
     </div>
+
+    <p>Projects You are Part of</p>
+    <div className='row'>
+    {teamMembers.map(member => (
+      <div className='col-md-6'  onClick={() => handleProjectTeamClick(member.projectId)}>
+      
+        <div className='centerD'>
+            <p className='pna'>{member.projectDetails.project}</p>
+            <progress value={progress} max="100"></progress>
+            <p className='pna2'>Job is 40% done</p>
+            <div class="proTeam">
+                      <img src={p3} alt="Circular Image" className="circular-image-top"/>
+                  </div>
+
+                  <div class="proTeam">
+                      <img src={p2} alt="Circular Image" className="circular-image-top"/>
+                  </div>
+          </div> 
+        </div>
+      ))}
+      </div>
+
+
+
+    <p>Review Projects</p>
+    <div className='row'>
+    {reviewProjects.map(member => (
+      <div className='col-md-6'  onClick={() => handleProjectReviowClick(member._id)}>
+        <div className='centerD'>
+            <p className='pna'>{member.projectId.projectName}</p>
+            <progress value={progress} max="100"></progress>
+            <p className='pna2'>Job is 40% done</p>
+            <div class="proTeam">
+                      <img src={p3} alt="Circular Image" className="circular-image-top"/>
+                  </div>
+
+                  <div class="proTeam">
+                      <img src={p2} alt="Circular Image" className="circular-image-top"/>
+                  </div>
+          </div> 
+          
+        </div>
+      ))}
+      </div>
+     
 
     <p className='ra'>Recent Activities</p>
     <div className='row'>

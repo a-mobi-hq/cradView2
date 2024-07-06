@@ -6,6 +6,7 @@ import { useNavigate,useLocation } from 'react-router-dom';
 import API_BASE_URL from './config/apiConfig';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+import { useParams } from 'react-router-dom';
 
 function Login() {
 
@@ -21,7 +22,7 @@ function Login() {
     const link = `${window.location.origin}${location.pathname}${location.search}${location.hash}`;
     const match = link.match(/\/start\/(.+)/);
     const uniqueCode = match ? match[1] : '';
-
+    const { id } = useParams();
     console.log('Unique Code:', uniqueCode);
 
     const handleTogglePassword = () => {
@@ -41,8 +42,9 @@ function Login() {
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         link: link,
-        username: '',
+        email: '',
         password: '',
+        uniqueCode:id,
       });
     
       const handleChange = (e) => {
@@ -54,7 +56,7 @@ function Login() {
     
       const handleSubmit = (e) => {
         e.preventDefault();
-        
+        console.log(formData);
         login(formData);
     
        
@@ -124,11 +126,11 @@ function Login() {
             <p className='lgT2'>Fill in neccessary details to proceed</p>
             <form onSubmit={handleSubmit}> 
             <div className="inputs-container">
-                <label htmlFor="email" className='lab'>Email or Phone Number</label>
+                <label htmlFor="email" className='lab'>Email</label>
                 <input
                   type="text"
-                  id="username"
-                  value={formData.username}
+                  id="email"
+                  value={formData.email}
                   onChange={handleChange}
                   className="custom-input"
                 />

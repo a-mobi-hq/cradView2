@@ -52,12 +52,13 @@ function PageFeedback() {
 
   return (
     <>
-      <div className='container-fluid'>
-        <Header />
-        <div className='row'>
-          <Menu />
+     <Header />
+      <div className='container'>
+       
+        
+       
 
-          <div className='col-md-9'>
+          <div className='col-md-12'>
             <div className='centerC'>
               <div className='text-center'>
                 <p className='centerH'>Feedback</p>
@@ -76,7 +77,7 @@ function PageFeedback() {
             </div>
           </div>
         </div>
-      </div>
+     
     </>
   );
 }
