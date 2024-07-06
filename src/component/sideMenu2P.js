@@ -53,6 +53,15 @@ const SideMenu2 = () => {
     updateStreak();
   }, []);
 
+
+  function handleLogout() {
+    // Clear local storage
+    localStorage.clear();
+    
+    // Redirect to login page or any other appropriate action
+    window.location.href = '/login';
+  }
+  
   return (
     <>
     
@@ -132,7 +141,7 @@ const SideMenu2 = () => {
           {!isCollapsed && <span>Edit Profile</span>}
         </li> */}
 
-        <li>
+        <li onClick={handleLogout}>
           <FontAwesomeIcon icon={faCog} />
           {!isCollapsed && <span>Logout</span>}
         </li>

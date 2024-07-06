@@ -40,6 +40,14 @@ const SideMenu2 = () => {
     }
   };
 
+  function handleLogout() {
+    // Clear local storage
+    localStorage.clear();
+    
+    // Redirect to login page or any other appropriate action
+    window.location.href = '/login';
+  }
+
   // Fetch streak when component mounts
   useEffect(() => {
     updateStreak();
@@ -106,7 +114,7 @@ const SideMenu2 = () => {
           {!isCollapsed && <span>Edit Profile</span>}
         </li> */}
 
-        <li>
+        <li onClick={handleLogout}>
           <FontAwesomeIcon icon={faCog} />
           {!isCollapsed && <span>Logout</span>}
         </li>
