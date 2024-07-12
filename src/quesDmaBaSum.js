@@ -664,6 +664,63 @@ const handleInsertFile = (file) => {
      setResizingImage(null);
    }
  };
+
+ const handleClickMo = (id) => {
+  // Handle click event and set the selected answer
+  navigate('/questionDmaMoSum/');
+};
+
+const handleClickPm = (id) => {
+  // Handle click event and set the selected answer
+  navigate('/questionDmaPmSum/');
+};
+
+const handleClickMm = (id) => {
+  // Handle click event and set the selected answer
+  navigate('/questionDmaMmSum/');
+};
+
+const handleClickMc = (id) => {
+  // Handle click event and set the selected answer
+  navigate('/questionDmaMcSum/');
+};
+
+const handleClickMt = (id) => {
+  // Handle click event and set the selected answer
+  navigate('/questionDmaMtSum/');
+};
+
+const handleClickMa = (id) => {
+  // Handle click event and set the selected answer
+  navigate('/questionDmaMaSum/');
+};
+ 
+const handleClickBa = (id) => {
+  // Handle click event and set the selected answer
+  navigate('/questionDmaBaSum/');
+};
+ 
+const handleClickIp = (id) => {
+  // Handle click event and set the selected answer
+  navigate('/questionDmaIpSum/');
+};
+
+const handleClickRm = (id) => {
+  // Handle click event and set the selected answer
+  navigate('/questionDmaRmSum/');
+};
+ 
+
+const handleClickRo = (id) => {
+  // Handle click event and set the selected answer
+  navigate('/questionDmaRoSum/');
+};
+
+const handleClickMn = (id) => {
+  // Handle click event and set the selected answer
+  navigate('/questionDmaMnSum/');
+};
+ 
  
       return (
 
@@ -677,6 +734,53 @@ const handleInsertFile = (file) => {
         
          <Header />
          <div className={`main-content2 ${showScrollableDiv ? 'shrink' : ''}`}>
+        <div className='catHod'>
+          <span className='selQ' onClick={handleClickMa}>
+            Market Analysis
+          </span>
+
+          <span className='selQ' onClick={handleClickMo}>
+          Marketing Objectives
+          </span>
+
+          <span className='selQ' onClick={handleClickPm}>
+          Positioning and Messaging
+          </span>
+
+          <span className='selQ' onClick={handleClickMm}>
+          Marketing Mix (4Ps)
+          </span>
+
+          <span className='selQ' onClick={handleClickMc}>
+          Marketing Channels
+          </span>
+
+          <span className='selQ' onClick={handleClickMt}>
+          Marketing Tactics and Campaigns
+          </span>
+
+          <span className='selQ' onClick={handleClickMn}>
+          Measurement and Analytics
+          </span>
+
+          <span className='selQ' onClick={handleClickBa}>
+          Budget Allocation
+          </span>
+
+          <span className='selQ' onClick={handleClickIp}>
+          Implementation Plan
+          </span>
+
+          <span className='selQ' onClick={handleClickRm}>
+          Risk Management
+          </span>
+
+          <span className='selQ' onClick={handleClickRo}>
+          Review and Optimisation
+          </span>
+
+        </div>
+        
 
          <div className='text-center'>
                     <p className='textHp'>{questionName}</p>

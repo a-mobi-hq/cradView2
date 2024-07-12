@@ -19,10 +19,10 @@ function CreateProject() {
   return (
     <div>
       <div className='createPG'>
-        {/* <img src={logobg} className='createPI'></img> */}
+        <img src={logobg} className='createPI'></img>
       </div>
 
-      <ModalVideo open={isOpen} onClose={() => setIsOpen(true)}>
+      <ModalVideo open={isOpen} onClose={() => setIsOpen(false)}>
 
       </ModalVideo>
   
