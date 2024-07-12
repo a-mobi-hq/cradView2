@@ -10,7 +10,7 @@ import { Toaster, toast } from 'sonner';
 import { jwtDecode } from "jwt-decode";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
-
+import ModalVideo from './component/modalVideo';
 
 function QuestionBus() {
 
@@ -19,9 +19,13 @@ function QuestionBus() {
     const onClickHandler = () => navigate(``)
 
     const [question, setQuestion] = useState(null);
+    const [isOpen, setIsOpen]= useState(false);
     const access_token = localStorage.getItem('access_token');
     const decodedToken = jwtDecode(access_token);
     const userId = decodedToken.userId;
+    const [activeVideo, setActiveVideo] = useState("");
+    const [activeLink, setActiveLink] = useState("");
+    const [activeId, setActiveId] = useState("");
 
     const projectId = localStorage.getItem('nProject');
     const [loading, setLoading] = useState(false);
@@ -124,7 +128,197 @@ function QuestionBus() {
       };
       //submit answer
 
- 
+      useEffect(() => {
+        const checker = async (data) => {
+     
+          
+          try {
+          
+            const section = "SuccessMatrix"         
+            const response = await fetch(API_BASE_URL+'/api/checker', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${access_token}`,
+              },
+              body: JSON.stringify({projectId, userId, section}),
+            });
+      
+            if (response.status === 200) {
+              // If submission is successful, fetch another question
+              const responseData = await response.json();
+              console.log(responseData);
+              console.log(responseData.check);
+              const check = responseData.check;
+              if(responseData.check === 1){
+                console.log("active do nothing");
+                checkActiveIfEntered();
+             }else{
+              console.log("not active do shit");
+            
+              fetchRandomVideo();
+             }
+  
+  
+  
+            } else {
+              const result = await response.json();
+              
+              toast.error(result['error']);
+              console.error('Error:', result['error']);
+            }
+          } catch (error) {
+              //toast.error(result['error']);  
+              
+              console.error('An error occurred:', error);
+          }
+        };
+        checker();
+      }, [userId]);
+      
+  
+      const fetchRandomVideo = async () => {
+        try {
+          console.log('random');
+          const videoSubType  = 'SuccessMatrix';
+          const response = await fetch(`${API_BASE_URL}/api/video/count/${userId}/${projectId}/${videoSubType}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${access_token}`,
+            },
+          });
+          console.log(response);
+         
+          if (response.status == 200) {
+            const video = await response.json();
+            console.log("vide show");
+            console.log(video.video.videoLink);
+            console.log(video._id);
+            setActiveVideo(video.video); 
+            const link = video.video.videoLink.replace('https://youtu.be/', '');
+            setActiveLink(link); 
+           
+            setIsOpen(true);
+            videoActive(video.video);
+          } else {
+            console.error('Error fetching video:', response.statusText);
+          }
+        } catch (error) {
+          console.error('An error occurred while fetching the random video:', error.message);
+        }
+      };
+  
+  
+     
+      const videoActive = async (data) => {
+        try {
+          console.log("setting active");
+          const videoId = data._id;
+          console.log(videoId);
+          const videoSubType  = 'SuccessMatrix';
+          const response = await fetch(`${API_BASE_URL}/api/video/active`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${access_token}`,
+            },
+            body: JSON.stringify({ userId, projectId, videoId, videoSubType }),
+          });
+          console.log(response);
+         
+          if (response.status == 200) {
+            const video = await response.json();
+            console.log("vide show");
+            console.log(video);
+            console.log(video.video._id);
+            setActiveId(video.video._id); 
+           
+          } else {
+            console.error('Error fetching video:', response.statusText);
+          }
+        } catch (error) {
+          console.error('An error occurred while fetching the random video:', error.message);
+        }
+      };
+  
+      const checkActive = async () => {
+        try {
+          console.log("in active");
+          const videoSubType  = 'SuccessMatrix';
+          const response = await fetch(`${API_BASE_URL}/api/video/active`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${access_token}`,
+            },
+            body: JSON.stringify({ userId, projectId, videoSubType }),
+          });
+          console.log(response);
+         
+          if (response.status == 200) {
+            const video = await response.json();
+           
+            console.log(video);
+            console.log(video.active);
+            if (video.active) {
+              console.log('true');
+              setActiveVideo(video); 
+            }else{
+              console.log('false');
+              fetchRandomVideo();
+            }
+           
+          } else {
+            console.error('Error fetching video:', response.statusText);
+          }
+        } catch (error) {
+          console.error('An error occurred while fetching the random video:', error.message);
+        }
+      };
+
+      const checkActiveIfEntered = async () => {
+        try {
+          console.log("in active when enetered");
+          const videoSubType  = 'SuccessMatrix';
+          const response = await fetch(`${API_BASE_URL}/api/video/active/check`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${access_token}`,
+            },
+            body: JSON.stringify({ userId, projectId, videoSubType }),
+          });
+          console.log(response);
+         
+          if (response.status == 200) {
+            const video = await response.json();
+           
+            console.log(video);
+            console.log(video.active);
+            if(video.active){
+              console.log(video.video.videoId.videoLink);
+              console.log('true');
+              setActiveVideo(video.video.videoId); 
+              const link = video.video.videoId.videoLink.replace('https://youtu.be/', '');
+              setActiveLink(link); 
+              setActiveId(video.video._id); 
+              // setActiveLink(video.video.videoId.videoLink); 
+              setIsOpen(true);
+            }else{
+              // fetchRandomVideo();
+              console.log('false');
+             
+            }
+           
+          } else {
+            console.error('Error fetching video:', response.statusText);
+          }
+        } catch (error) {
+          console.error('An error occurred while fetching the random video:', error.message);
+        }
+      };
+  
       return (
 
        
@@ -201,6 +395,9 @@ function QuestionBus() {
             {/* Add more content as needed */}
         </div>
     </div>
+    <ModalVideo open={isOpen} onClose={() => setIsOpen(false)} videoId={activeVideo ? activeVideo : ''} link={activeLink} id={activeId}>
+
+</ModalVideo>
 </div> 
 
       );
