@@ -40,6 +40,7 @@
     "react-spinners": "^0.13.8",
     "react-toastify": "^10.0.5",
     "react-youtube": "^10.1.0",
+    "socket.io-client": "^4.7.5",
     "sonner": "^1.4.41",
     "web-vitals": "^2.1.4",
     "wowjs": "^1.1.3"
