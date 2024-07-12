@@ -8,16 +8,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 import YouTube from 'react-youtube';
 
-export default function ModalVideo({ open, onClose}){
+export default function ModalVideo({ open, onClose, videoId,link,id}){
 
     const navigate = useNavigate()
     const [loading, setLoading] = useState(true);
     const [showButton, setShowButton] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');  
+    const access_token = localStorage.getItem('access_token');
     
+   // const link = videoId.videoLink;
+    //const newLink = link.replace('https://youtu.be/', '');
      
+    console.log("modal");
+    console.log(link);
+    console.log(videoId);
+    console.log(id);
+
    
-  
     useEffect(() => {
       // Set loading to true initially
       setLoading(true);
@@ -32,6 +39,44 @@ export default function ModalVideo({ open, onClose}){
       return () => clearTimeout(timer);
     }, []); 
    
+    const handleProceed = async () => {
+      // Perform any action here, for example, log the event or update a state
+      console.log('Proceed action performed');
+
+
+
+        
+        try {
+       
+
+          const response = await fetch(API_BASE_URL+'/api/video/status/'+id, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${access_token}`,
+            },
+           
+          });
+    
+          if (response.status === 200) {
+            // If submission is successful, fetch another question
+            const responseData = await response.json();
+            onClose();
+            console.log(responseData);
+          } else {
+            const result = await response.json();
+           
+           
+            console.error('Error:', result['error']);
+          }
+        } catch (error) {
+            //toast.error(result['error']);  
+           
+            console.error('An error occurred:', error);
+        }
+      // Close the modal
+     
+    };
     if(!open) return null
     return ReactDOM.createPortal(
         <>
@@ -39,10 +84,10 @@ export default function ModalVideo({ open, onClose}){
             <div className="modalSt mdN">
             { errorMessage &&  <p className="createER">Project name is empty</p>}
                
-            <YouTube videoId={'2lj31MHBgWM?si=p1u2RVuEXIvdO9C3?si=A18rj2PVfaowOWQj'} />
+            <YouTube videoId={link} />
             
             {/* {showButton && ( */}
-            <p onClick={onClose} className="closeMMM">Proceed</p>
+            <p onClick={handleProceed} className="closeMMM">Proceed</p>
               
             {/* )} */}
                 

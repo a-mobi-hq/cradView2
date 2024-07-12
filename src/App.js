@@ -95,6 +95,7 @@ import QuestionDmaBaSum from './quesDmaBaSum';
 import QuestionDmaIpSum from './quesDmaIpSum';
 import QuestionDmaRmSum from './quesDmaRmSum';
 import QuestionDmaRoSum from './quesDmaRoSum';
+import QuestionEdit from './questionEdit';
 
 import ProblemStatement from './problemstatement';
 import PageBenefit from './pageBenefit';
@@ -255,6 +256,9 @@ import PitchDeckView from './pitchDeckView';
 import TeamView from './teamView';
 import TeamAdd from './teamAdd';
 import SharePhase from './sharePhase';
+import Chat from './chat';
+import Branding from './branding';
+import BrandingUpload from './brandingUpload';
 
 function App() {
   return (
@@ -304,6 +308,8 @@ function App() {
         <Route path="/questionDmaRo" element= {<QuestionDmaRo/>} />
 
 
+        <Route path="/branding" element= {<Branding />} />
+        <Route path="/brandingUpload" element= {<BrandingUpload />} />
         <Route path="/marketAnalysis" element= {<MarketAnalysis />} />
         <Route path="/ExecutiveSummary" element= {<ExecutiveSummary />} />
         <Route path="/executiveSummarys" element= {<ExecutiveSummarys />} />
@@ -346,6 +352,8 @@ function App() {
         <Route path="/questionDmaIpSum" element= {<QuestionDmaIpSum />} />
         <Route path="/questionDmaRmSum" element= {<QuestionDmaRmSum />} />
         <Route path="/questionDmaRoSum" element= {<QuestionDmaRoSum />} />
+        <Route path="/questionEdit/:id" element= {<QuestionEdit />} />
+        <Route path="/chat" element= {<Chat />} />
 
 
 

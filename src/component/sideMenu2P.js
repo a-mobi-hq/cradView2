@@ -25,6 +25,8 @@ const SideMenu2 = () => {
   const onClickS = () => navigate(`/questionSucIo`);
 
   const onClickD = () => navigate(`/questionDmaMa`);
+
+  const onClickB = () => navigate(`/branding`);
   const onClickT = () => navigate(`/teamView`);
 
 
@@ -61,7 +63,7 @@ const SideMenu2 = () => {
     // Redirect to login page or any other appropriate action
     window.location.href = '/login';
   }
-  
+
   return (
     <>
     
@@ -107,6 +109,12 @@ const SideMenu2 = () => {
             <CiCalculator1 />
           
           {!isCollapsed && <span>Detailed Marketing Strategies</span>}
+        </li>
+
+        <li onClick={onClickB}>
+            <CiCalculator1 />
+          
+          {!isCollapsed && <span>Branding</span>}
         </li>
 
         <li onClick={onClickCG}>

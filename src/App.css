@@ -665,6 +665,9 @@ background-color: white!important;
   height: 40px; 
   outline: none;
   padding: 5px;
+  border: 1px #e3e3e3 solid;
+  border-radius: 5px;
+  background-color: #f0f0f0;
 }
 
 
@@ -679,6 +682,9 @@ background-color: white!important;
   height: 40px; 
   outline: none;
   padding: 5px;
+  border: 1px #e3e3e3 solid;
+  border-radius: 5px;
+  background-color: #f0f0f0;
 }
 
 .createBrandA{
@@ -695,12 +701,11 @@ background-color: white!important;
   height: 100px;
   background-color: #e8eaf5;
   text-align: center;
+  border-radius: 12px;
 }
 
 .brandlogo{
-  width: 50px;
-  margin-left: 0px;
-  margin-top: 30px;
+  width: -webkit-fill-available;
 }
 
 
@@ -4908,7 +4913,6 @@ margin-left:5px;
 /*new modal*/
 .mdN{
   padding: 0px !important;
-  width: 70%  !important;
   background: transparent !important;
 }
 .nn{
@@ -6679,6 +6683,7 @@ color: red;
   color: #fff;
   cursor: pointer;
   transition: box-shadow 0.3s ease;
+  min-height: 270px;
 }
 
 .caseBA:hover {
@@ -6723,6 +6728,7 @@ color: red;
   color: #fff;
   cursor: pointer;
   transition: box-shadow 0.3s ease;
+  min-height: 270px;
 }
 
 .caseBA2:hover {
@@ -6767,6 +6773,7 @@ color: red;
   color: #fff;
   cursor: pointer;
   transition: box-shadow 0.3s ease;
+  min-height: 270px;
 }
 
 .caseBA3:hover {
@@ -6813,6 +6820,7 @@ color: red;
   border: 2px solid #1a1a1a;
   cursor: pointer;
   transition: box-shadow 0.3s ease;
+  min-height: 270px;
 }
 
 .caseBA4:hover {
@@ -6859,6 +6867,7 @@ color: red;
   cursor: pointer;
   transition: box-shadow 0.3s ease;
   border-radius: 15px;
+  
 }
 
 .caseBA5:hover {
@@ -7397,3 +7406,17 @@ color: red;
 .conCa2{
   font-size: 12px;
 }
+
+.selQ{
+  background-color: #1f1f1f;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: #fff;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.catHod{
+  margin-bottom: 10px;
+}
+
