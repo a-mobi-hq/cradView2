@@ -16,11 +16,10 @@ const ImageUpload = () => {
   const [images, setImages] = useState([]);
   const projectId = localStorage.getItem('nProject');
   const prototypeType = localStorage.getItem('selectedPrototype');
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setIsLoading] = useState(false);
  const access_token = localStorage.getItem('access_token');
    const decodedToken = jwtDecode(access_token);
    const userId = decodedToken.userId;
-   const [loading, setLoading] = useState(false);
    const [boxes, setBoxes] = useState([]);
    const [selectedBox, setSelectedBox] = useState(null);
 
@@ -121,7 +120,7 @@ const ImageUpload = () => {
           const data = await response.json();
           console.log(data);
           setBoxes(data);
-          setLoading(false);
+          setIsLoading(false);
         }else{
           const result = await response.json();
           console.error('Error:', result['error']);
@@ -129,7 +128,7 @@ const ImageUpload = () => {
        
       } catch (err) {
         
-        setLoading(false);
+        setIsLoading(false);
         console.log(err);
       }
     };

@@ -92,7 +92,8 @@ function ScrapView ({ htmlContent })  {
       if (response.status === 200) {
         setLoading(false);
         console.log(response);
-        setLink(API_BASE_WEB_URL + link);
+        setLink('http://159.223.7.210:3000' + link);
+        //setLink(API_BASE_WEB_URL + link);
       } else {
         const result = await response.json();
         setLoading(false);
