@@ -27,6 +27,8 @@ function QuestionBusIntro() {
  const [showImagePopup, setShowImagePopup] = useState(false);
     const [answers, setAnswers] = useState([]);
     const [answersV, setAnswersV] = useState([]);
+    const [cat, setCat] = useState([]);
+    const [answered, setAnswered] = useState([]);
     const [hoveredIndex, setHoveredIndex] = useState(null);
  const [loading, setLoading] = useState(false);
  const [error, setError] = useState(null);
@@ -665,6 +667,150 @@ const handleInsertFile = (file) => {
    }
  };
  
+
+ useEffect(() => {
+  const createAnswered = async () => {
+   console.log("here");
+    setLoading(true);
+ 
+    try {
+      const response = await fetch(API_BASE_URL+'/api/answered',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${access_token}`,
+        },
+        body: JSON.stringify({projectId, questionType, questionSubType,questionName}),
+      });
+      if (response.status === 200) {
+        setLoading(false);
+        console.log(response.status);
+        console.log(response);   
+        console.log('Task created successfully');
+      } else {
+        const result = await response.json();
+        setLoading(false);
+        toast.error(result['error']);
+          console.error('Error:', result['error']);        
+      }
+    } catch (error) {
+      setLoading(false);
+      console.error('An error occurred:', error);
+      console.log(error.response);
+    }
+  };
+  createAnswered();
+ }, []);
+
+ 
+ useEffect(() => {
+  const getPrevious = async () => {
+    try {
+      const scrapResponse = await fetch(API_BASE_URL + `/api/answer/answered/${questionType}/${questionSubType}/${projectId}`, {
+          headers: {
+            'Content-Type': 'application/json', 
+            'Authorization': `Bearer ${access_token}` // Include the token in the request headers
+          }
+        });
+      
+    if(scrapResponse.status === 200) {
+      // If summary exists, fetch the summary data
+      const dataS = await scrapResponse.json();
+      console.log("fire");
+      console.log(dataS);
+      setAnswered(dataS.data);
+     
+   } else {
+      console.log("fireNo");
+      const data = await scrapResponse.json();
+      console.log(data);
+      setLoading(false);
+  }
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
+  };
+
+  getPrevious();
+}, [projectId]);
+
+ useEffect(() => {
+  const fetchAnsweredCat = async () => {
+    try {
+      const scrapResponse = await fetch(API_BASE_URL + `/api/answered/${projectId}/${questionType}`, {
+          headers: {
+            'Content-Type': 'application/json', 
+            'Authorization': `Bearer ${access_token}` // Include the token in the request headers
+          }
+        });
+      
+    if(scrapResponse.status === 200) {
+      // If summary exists, fetch the summary data
+      const dataS = await scrapResponse.json();
+      console.log(dataS.data.entry);
+      setCat(dataS.data.entry);
+     
+   } else {
+      
+      const data = await scrapResponse.json();
+      console.log(data);
+      setLoading(false);
+  }
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
+  };
+
+  fetchAnsweredCat();
+}, [projectId]);
+
+ function handleClickM(questionSubType) {
+ 
+  switch (questionSubType) {
+    case 'MarketingObjectives':
+      navigate('/questionDmaMoSum');
+      break;
+    case 'MarketingMix(4Ps)':
+      navigate('/questionDmaMmSum');
+      break;
+    case 'MarketingChannels':
+      navigate('/questionDmaMcSum');
+      break;
+    case 'MarketingTacticsAndCampaigns':
+        navigate('/questionDmaMtSum');
+        break;
+    case 'MarketAnalysis':
+        navigate('/questionDmaMaSum');
+        break;
+    case 'BudgetAllocation':
+        navigate('/questionDmaBaSum');
+        break;
+    case 'ImplementationPlan':
+        navigate('/questionDmaIpSum');
+        break;
+    case 'RiskManagement':
+        navigate('/questionDmaRmSum');
+        break;
+    case 'ReviewAndOptimisation':
+          navigate('/questionDmaRoSum');
+          break;
+    case 'MeasurementAndAnalytics':
+          navigate('/questionDmaMnSum');
+          break;
+    default:
+      console.warn('Unknown questionSubType:', questionSubType);
+  }
+}
+ 
+
+
+const handleClick = (id) => {
+  // Handle click event and set the selected answer
+  navigate('/questionEdit/'+id);
+};
+
       return (
 
        
@@ -677,7 +823,15 @@ const handleInsertFile = (file) => {
         
          <Header />
          <div className={`main-content2 ${showScrollableDiv ? 'shrink' : ''}`}>
-
+         <div className='catHod'>
+         
+         {cat.map((cat, index) => (
+        <span className='selQ' onClick={() => handleClickM(cat.questionSubType)}>
+          {cat.questionName}
+        </span>
+         ))}
+       
+        </div>
          <div className='text-center'>
                     <p className='textHp'>{questionName}</p>
                     <p className='textH'>Make sure you answer all questions</p>
@@ -860,24 +1014,12 @@ const handleInsertFile = (file) => {
 
          <div className={`scrollable-div ${showScrollableDiv ? 'show' : ''}`}>
             <button className="close-button" onClick={handleToggle}>X</button>
-            <div className='qulis'>
-                <p style={{marginBottom:7}}>What existing solutions or competitors are in this space, and how does your idea differentiate?</p>
+            {answered.map((answered, index) => (
+            <div className='qulis'  onClick={() => handleClick(answered._id)} style={{cursor:'pointer'}}>
+                <p style={{marginBottom:7}}>{answered.questionId.question}</p>
             </div>
-            <div className='qulis'>
-                <p style={{marginBottom:7}}>What existing solutions or competitors are in this space, and how does your idea differentiate?</p>
-            </div>
-            <div className='qulis'>
-                <p style={{marginBottom:7}}>What existing solutions or competitors are in this space, and how does your idea differentiate?</p>
-            </div>
-            <div className='qulis'>
-                <p style={{marginBottom:7}}>What existing solutions or competitors are in this space, and how does your idea differentiate?</p>
-            </div>
-            <div className='qulis'>
-                <p style={{marginBottom:7}}>What existing solutions or competitors are in this space, and how does your idea differentiate?</p>
-            </div>
-            <div className='qulis'>
-                <p style={{marginBottom:7}}>What existing solutions or competitors are in this space, and how does your idea differentiate?</p>
-            </div>
+           ))}
+            
             
             
             {/* Add more content as needed */}

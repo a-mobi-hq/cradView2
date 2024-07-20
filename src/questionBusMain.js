@@ -4,12 +4,16 @@ import bro from './images/bro.png';
 import Header from './component/header';
 import Menu from './component/menu';
 import SideMenu2 from './component/sideMenu2';
+import SideMenu2P from './component/sideMenu2P';
+import SideMenu2I from './component/sideMenu2I';
+import SideMenu2C from './component/sideMenu2C';
 import API_BASE_URL from './config/apiConfig';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useParams } from 'react-router-dom';
 import { Toaster, toast } from 'sonner';
 import { jwtDecode } from "jwt-decode";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+import ModalVideo from './component/modalVideo';
 
 
 function QuestionBus() {
@@ -17,11 +21,16 @@ function QuestionBus() {
     const navigate = useNavigate()
     
     const onClickHandler = () => navigate(``)
-
+    const { phase,category } = useParams();
     const [question, setQuestion] = useState(null);
     const access_token = localStorage.getItem('access_token');
     const decodedToken = jwtDecode(access_token);
     const userId = decodedToken.userId;
+
+    const [activeVideo, setActiveVideo] = useState("");
+    const [activeLink, setActiveLink] = useState("");
+    const [activeId, setActiveId] = useState("");
+    const [isOpen, setIsOpen]= useState(false);
 
     const projectId = localStorage.getItem('nProject');
     const [loading, setLoading] = useState(false);
@@ -32,101 +41,76 @@ function QuestionBus() {
     const [mainCategory, setMainCategory] = useState('');
 
     const [showScrollableDiv, setShowScrollableDiv] = useState(false);
-
+    const [subCategory, setSubCategory] = useState(null);
+    const [subCategoryName, setSubCategoryName] = useState(null);
+    const [answered, setAnswered] = useState([]);
     const handleToggle = () => {
       setShowScrollableDiv(!showScrollableDiv);
     };
-
-    const items = [
-      'Introduction',
-      'Opportunity Analysis',
-      'Market Analysis',
-      'Solution Description',
-      'Cost Analysis',
-      'Risk And Mitigation Strategies Implementation Plan'
-    ];
-    
-    let originalText = "";
-      // First list: names as they are
-      // const originalList = items.map((item, index) => (
-      //   <li key={index}>{item}</li>
-      // ));
-    
-      // Second list: names with spaces removed
-      const modifiedList = items.map((item, index) => (
-        <li key={index}>{item.replace(/\s+/g, '')}</li>
-      ));
-
+ 
       useEffect(() => {
-        checkAndFetchQuestions();
-      }, []); // Run once on component mount
-    
-      const checkAndFetchQuestions = async () => {
-        try {
-          let foundUnansweredCategory = false;
-          let index = currentIndex;
-    
-          while (!foundUnansweredCategory && index < modifiedList.length) {
-            const currentCategory = modifiedList[index];
-            console.log(currentCategory.props.children);
-            const response = await fetchSummary(currentCategory.props.children);
-    
-            if (!response.data) {
-              foundUnansweredCategory = true;
-              
-              setCurrentIndex(index); // Set the current index to the first unanswered category
-              console.log(index);
-              passFoward(currentCategory.props.children,index);
+        const fetchNextQuestion = async () => {
+          try {
+            const response = await fetch(`${API_BASE_URL}/api/finished/${projectId}/${category}`, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${access_token}`,
+              },
+            });
+            
+            if (response.ok) {
+              const data = await response.json();
+              console.log(data);
+              setSubCategory(data.subCategory);
+              setSubCategoryName(data.subCategoryName);
+              fetchUnansweredQuestion(data.subCategory);
+              getPrevious(data.subCategory);
+            } else {
+              console.error('Failed to fetch next question');
             }
-            index++;
+          } catch (error) {
+            console.error('Error fetching next question:', error);
           }
+        };
     
-          // if (!foundUnansweredCategory) {
-          //   console.log('All categories are answered');
-          //   // Handle scenario where all categories are answered
-          // } else {
-          //   console.log(items[currentIndex]);
-          //   setName(items[currentIndex]);
-          //   // Fetch unanswered questions for the current category
-          //   await fetchUnansweredQuestion(modifiedList[index].props.children);
-          // }
-        } catch (error) {
-          console.error('An error occurred:', error.message);
-        }
-      };
+        fetchNextQuestion();
+      }, [projectId, category]);
+     
 
-      const passFoward = async (category,currentCategory) => {
-        console.log("pass "+ currentCategory)
-        setName(items[currentCategory]);
-        setMainCategory(category);
-        await fetchUnansweredQuestion(category);
-      }
-    
-      const fetchSummary = async (category) => {
+      
+
+      const fetchUnansweredQuestion = async (subCategoryPassed) => {
         try {
-          const response = await fetch(`${API_BASE_URL}/api/summary/${projectId}/BusinessCaseBuilder/${category}`, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${access_token}`,
-            },
-          });
-          //const response = await fetch(`${API_BASE_URL}/api/summary/${projectId}/BusinessCaseBuilder/${category}`);
+          console.log(subCategoryPassed);
+          const response = await fetch(API_BASE_URL+`/api/new/question/${userId}/${projectId}/${category}/${subCategoryPassed}`);
           if (response.status === 200) {
             const data = await response.json();
             console.log(data);
-            return data;
+            if (!data.data) {
+                createFinish(subCategoryPassed);
+                
+            } else {
+              console.log(data.data.questionOrder);
+              setQuestion(data.data);
+              if(data.data.questionOrder ==  3){
+                fetchRandomVideo();
+              }
+            }
+            // setQuestion(data.data); // Set the fetched question to state
           } else {
-            const errorMessage = `Error fetching summary: ${response.statusText}`;
+            const errorMessage = `Error fetching question: ${response.statusText}`;
             console.error(errorMessage);
             throw new Error(errorMessage);
           }
         } catch (error) {
           console.error('An error occurred:', error.message);
-          throw error;
         }
       };
 
+     
+    
+     
       
 
 
@@ -141,34 +125,8 @@ function QuestionBus() {
             });
           };
 
-    const fetchUnansweredQuestion = async (category) => {
-        try {
-         console.log( "am here");
-         console.log( "category"+ category);
-          const response = await fetch(API_BASE_URL+`/api/new/question/${userId}/${projectId}/BusinessCaseBuilder/${category}`);
-          if (response.status === 200) {
-            const data = await response.json();
-            if (!data.data) {
-               //setNoMoreQuestions(true);
-                navigate(`/questionBusMainSum/BusinessCaseBuilder/${mainCategory}`);
-            } else {
-              setQuestion(data.data);
-            }
-            // setQuestion(data.data); // Set the fetched question to state
-          } else {
-            const errorMessage = `Error fetching question: ${response.statusText}`;
-            console.error(errorMessage);
-            throw new Error(errorMessage);
-          }
-        } catch (error) {
-          console.error('An error occurred:', error.message);
-        }
-      };
     
-    // useEffect(() => {
-       
-    //     fetchUnansweredQuestion(); // Call the function to fetch the unanswered question
-    //   }, [userId]);
+  
       
       const handleSubmit = (e) => {
         e.preventDefault();
@@ -182,8 +140,8 @@ function QuestionBus() {
          data.userId = userId;  
          data.questionId = question._id; 
          data.projectId = projectId; 
-         data.questionType = 'BusinessCaseBuilder'; 
-         data.questionSubType = mainCategory; 
+         data.questionType = category; 
+         data.questionSubType = subCategory; 
 
           console.log(data);
           
@@ -201,7 +159,7 @@ function QuestionBus() {
             const responseData = await response.json();
             console.log(responseData);
 
-            fetchUnansweredQuestion(mainCategory);
+            fetchUnansweredQuestion(subCategory);
             setLoading(false);
             setFormData({
                      answer: '',
@@ -220,7 +178,239 @@ function QuestionBus() {
       };
       //submit answer
 
- 
+      
+
+        const getPrevious = async (questionSubType) => {
+          try {
+            const scrapResponse = await fetch(API_BASE_URL + `/api/answer/answered/${category}/${questionSubType}/${projectId}`, {
+                headers: {
+                  'Content-Type': 'application/json', 
+                  'Authorization': `Bearer ${access_token}` // Include the token in the request headers
+                }
+              });
+            
+          if(scrapResponse.status === 200) {
+            // If summary exists, fetch the summary data
+            const dataS = await scrapResponse.json();
+            console.log("fire");
+            console.log(dataS);
+            setAnswered(dataS.data);
+           
+         } else {
+            console.log("fireNo");
+            const data = await scrapResponse.json();
+            console.log(data);
+            setLoading(false);
+        }
+          } catch (error) {
+           
+            setLoading(false);
+          }
+        };
+      
+        const handleClick = (id) => {
+          // Handle click event and set the selected answer
+          navigate('/questionEdit/'+id);
+        };
+        
+
+        const createFinish = async (subCategoryPassed) => {
+          setLoading(true);
+          
+          try {
+          
+  
+            
+            const response = await fetch(API_BASE_URL+'/api/finished', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${access_token}`,
+              },
+              body: JSON.stringify({questionType:category, questionSubType:subCategoryPassed,projectId,userId}),
+            });
+      
+            if (response.status === 200) {
+              // If submission is successful, fetch another question
+              const responseData = await response.json();
+              console.log(responseData);
+  
+              
+              setLoading(false);
+              setFormData({
+                       answer: '',
+                    });
+              navigate(`/questionBusMainSum/${phase}/${category}/${subCategoryPassed}`);
+            } else {
+              const result = await response.json();
+              setLoading(false);
+              toast.error(result['error']);
+              console.error('Error:', result['error']);
+            }
+          } catch (error) {
+              //toast.error(result['error']);  
+              setLoading(false);
+              console.error('An error occurred:', error);
+          }
+        };
+       
+
+        //Check if user as started Section
+        useEffect(() => {
+          const checker = async () => {
+       
+            
+            try {
+            
+              const section = category        
+              const response = await fetch(API_BASE_URL+'/api/checker', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${access_token}`,
+                },
+                body: JSON.stringify({projectId, userId, section}),
+              });
+        
+              if (response.status === 200) {
+                // If submission is successful, fetch another question
+                const responseData = await response.json();
+                console.log(responseData);
+                console.log(responseData.check);
+                const check = responseData.check;
+               if(responseData.check === 1){
+                  console.log("active do nothing");
+                  checkActiveIfEntered();
+               }else{
+                  console.log("not active do shit");
+                  fetchRandomVideo();
+               }
+    
+    
+    
+              } else {
+                const result = await response.json();
+                
+                toast.error(result['error']);
+                console.error('Error:', result['error']);
+              }
+            } catch (error) {
+                //toast.error(result['error']);  
+                
+                console.error('An error occurred:', error);
+            }
+          };
+          checker();
+        }, []);
+
+        const fetchRandomVideo = async () => {
+          try {
+            console.log('random');
+            const videoSubType  = category;
+            const response = await fetch(`${API_BASE_URL}/api/video/count/${userId}/${projectId}/${videoSubType}`, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${access_token}`,
+              },
+            });
+            console.log(response);
+           
+            if (response.status == 200) {
+              const video = await response.json();
+              console.log("vide show");
+              console.log(video.video.videoLink);
+              console.log(video._id);
+              setActiveVideo(video.video); 
+              const link = video.video.videoLink.replace('https://youtu.be/', '');
+              setActiveLink(link); 
+             
+              setIsOpen(true);
+              videoActive(video.video);
+            } else {
+              console.error('Error fetching video:', response.statusText);
+            }
+          } catch (error) {
+            console.error('An error occurred while fetching the random video:', error.message);
+          }
+        };
+
+        //set that user as been here before
+        const videoActive = async (data) => {
+          try {
+            console.log("setting active");
+            const videoId = data._id;
+            console.log(videoId);
+            const videoSubType  = category;
+            const response = await fetch(`${API_BASE_URL}/api/video/active`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${access_token}`,
+              },
+              body: JSON.stringify({ userId, projectId, videoId, videoSubType }),
+            });
+            console.log(response);
+           
+            if (response.status == 200) {
+              const video = await response.json();
+              console.log("vide show");
+              console.log(video);
+              console.log(video.video._id);
+              setActiveId(video.video._id); 
+             
+            } else {
+              console.error('Error fetching video:', response.statusText);
+            }
+          } catch (error) {
+            console.error('An error occurred while fetching the random video:', error.message);
+          }
+        };
+    
+       
+        //check if there is an active video not finished if the user as been here before
+        const checkActiveIfEntered = async () => {
+          try {
+            console.log("in active when enetered");
+            const videoSubType  = category;
+            const response = await fetch(`${API_BASE_URL}/api/video/active/check`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${access_token}`,
+              },
+              body: JSON.stringify({ userId, projectId, videoSubType }),
+            });
+            console.log(response);
+           
+            if (response.status == 200) {
+              const video = await response.json();
+             
+              console.log(video);
+              console.log(video.active);
+              if(video.active){
+                console.log(video.video.videoId.videoLink);
+                console.log('true');
+                setActiveVideo(video.video.videoId); 
+                const link = video.video.videoId.videoLink.replace('https://youtu.be/', '');
+                setActiveLink(link); 
+                setActiveId(video.video._id); 
+                // setActiveLink(video.video.videoId.videoLink); 
+                setIsOpen(true);
+              }else{
+                 //fetchRandomVideo();
+                console.log('false');
+               
+              }
+             
+            } else {
+              console.error('Error fetching video:', response.statusText);
+            }
+          } catch (error) {
+            console.error('An error occurred while fetching the random video:', error.message);
+          }
+        };
+
       return (
 
        
@@ -228,19 +418,27 @@ function QuestionBus() {
       
 
     <div className='container2'>
-         <SideMenu2 />    
+          {phase === 'Ideation' && <SideMenu2 />}
+          {phase === 'ProductDefinition' && <SideMenu2P />}   
+          {phase === 'InitialDesign' && <SideMenu2I />}   
+          {phase === 'Commercialization' && <SideMenu2C />} 
          <div className="main-content">
         
          <Header />
          <div className={`main-content2 ${showScrollableDiv ? 'shrink' : ''}`}>
 
          <div className='text-center'>
-                    <p className='textHp'>{name}</p>
+                    <p className='textHp'>{subCategoryName}</p>
                     <p className='textH'>Make sure you answer all questions</p>
                 </div>
             
             <div>
-                <p className='prq' onClick={handleToggle}>Previous Questions</p>
+              <div className='row'>
+                  <div className='col-md-6'>
+                    <p className='prq' onClick={handleToggle}>Previous Questions</p>
+                  </div>
+              </div>
+               
             </div>
             
             <div className='centerC'>
@@ -274,26 +472,15 @@ function QuestionBus() {
 
          <div className={`scrollable-div ${showScrollableDiv ? 'show' : ''}`}>
             <button className="close-button" onClick={handleToggle}>X</button>
-            <div className='qulis'>
-                <p style={{marginBottom:7}}>What existing solutions or competitors are in this space, and how does your idea differentiate?</p>
-            </div>
-            <div className='qulis'>
-                <p style={{marginBottom:7}}>What existing solutions or competitors are in this space, and how does your idea differentiate?</p>
-            </div>
-            <div className='qulis'>
-                <p style={{marginBottom:7}}>What existing solutions or competitors are in this space, and how does your idea differentiate?</p>
-            </div>
-            <div className='qulis'>
-                <p style={{marginBottom:7}}>What existing solutions or competitors are in this space, and how does your idea differentiate?</p>
-            </div>
-            <div className='qulis'>
-                <p style={{marginBottom:7}}>What existing solutions or competitors are in this space, and how does your idea differentiate?</p>
-            </div>
-            <div className='qulis'>
-                <p style={{marginBottom:7}}>What existing solutions or competitors are in this space, and how does your idea differentiate?</p>
-            </div>
+            {(answered || []).map((answered, index) => (
+              <div className='qulis' key={index} onClick={() => handleClick(answered._id)} style={{ cursor: 'pointer' }}>
+                <p style={{ marginBottom: 7 }}>{answered.questionId.question}</p>
+              </div>
+            ))}
             
-            
+            <ModalVideo open={isOpen} onClose={() => setIsOpen(false)} videoId={activeVideo ? activeVideo : ''} link={activeLink} id={activeId}>
+
+</ModalVideo>
             {/* Add more content as needed */}
         </div>
     </div>
