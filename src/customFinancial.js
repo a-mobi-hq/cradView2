@@ -20,6 +20,11 @@ function CustomFinancial() {
 
   const navigate = useNavigate()
   const onClickNext = () => navigate(`/inflation`);
+  const onClickNext2 = () => navigate(`/operatingIncome`);
+  const onClickNext3 = () => navigate(`/expenses`);
+  const onClickNext4 = () => navigate(`/netProfit`);
+  const onClickNext5 = () => navigate(`/customerInflux`);
+  const onClickNext6 = () => navigate(`/customerGrowth`);
     const access_token = localStorage.getItem('access_token');
     const decodedToken = jwtDecode(access_token);
     const userId = decodedToken.userId;
@@ -58,35 +63,35 @@ function CustomFinancial() {
               </div>
 
               <div className='col-md-4'>
-                <div className='columnGraph'>
+                <div className='columnGraph' onClick={onClickNext2}>
                       <img src={graph5} className='imgX'></img>
                       <p className='graphName'>Operating Income</p>
                 </div> 
               </div>
 
               <div className='col-md-4'>
-                <div className='columnGraph'>
+                <div className='columnGraph' onClick={onClickNext3}>
                       <img src={graph3} className='imgX'></img>
-                      <p className='graphName'>Expensses</p>
+                      <p className='graphName'>Expenses</p>
                 </div> 
               </div>
 
               <div className='col-md-4'>
-                <div className='columnGraph'>
+                <div className='columnGraph' onClick={onClickNext4}>
                       <img src={graph2} className='imgX'></img>
                       <p className='graphName'>Net Profit</p>
                 </div> 
               </div>
 
               <div className='col-md-4'>
-                <div className='columnGraph'>
+                <div className='columnGraph' onClick={onClickNext5}>
                       <img src={graph4} className='imgX'></img>
                       <p className='graphName'>Customer Influx</p>
                 </div> 
               </div>
 
               <div className='col-md-4'>
-                <div className='columnGraph'>
+                <div className='columnGraph' onClick={onClickNext6}>
                       <img src={graph1} className='imgX'></img>
                       <p className='graphName'>Company Growth Rate</p>
                 </div> 
