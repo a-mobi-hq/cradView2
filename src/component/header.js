@@ -11,10 +11,10 @@ import { CiBellOn ,CiUser, CiChat2} from 'react-icons/ci';
 import { MdOutlineBolt} from 'react-icons/md';
 import ChatToolModal from './chatToolModal';
 import API_BASE_URL from '../config/apiConfig';
+import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLightbulb, faTrash  } from '@fortawesome/free-solid-svg-icons';
 import { checkTokenValidity } from '../util/auth';
-import axios from 'axios';
 import { jwtDecode } from "jwt-decode";
 
 const Header = () => {
