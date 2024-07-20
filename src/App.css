@@ -1221,7 +1221,9 @@ background-color: white!important;
   border-radius: 25px;
   transition: border-radius 0.3s ease; /* Smooth transition */
   margin-bottom: 10px;
+  outline: none;
 }
+
 
 .custom-input1 {
   padding: 10px;
@@ -1236,7 +1238,7 @@ background-color: white!important;
 
 .custom-input:focus {
   outline: none;
-  border: 1px solid #1b45bf;
+  /* border: 1px solid #1b45bf; */
   border-radius: 25px; /* Change border radius when focused */
 }
 
@@ -7418,5 +7420,93 @@ color: red;
 
 .catHod{
   margin-bottom: 10px;
+}
+.streakTop{
+    font-size: 11px;
+    margin-right: 11px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    padding: 2px 4px;
+}
+
+.proSeg{
+  padding-top:40px;
+  padding-bottom: 40px;
+}
+.proSubTitle{
+  font-weight: 900;
+  padding-bottom: 10px;
+}
+
+.proName{
+  font-weight: 900;
+  font-size: 17px;
+  margin-bottom: 0.3rem;
+}
+
+.proSlog{
+  font-weight: 300;
+  font-size: 17px;
+  margin-bottom: 0.3rem;
+}
+.proMain{
+  font-size: 30px;
+  font-weight: 900;
+  padding-bottom: 30px;
+}
+
+.proImg{
+  height: 200px;
+  border-radius: 20px;
+  object-fit: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.proCon{
+  background-color: #1B45BF;
+    width: fit-content;
+    padding: 5px 7px;
+    border-radius: 20px;
+    color: #fff;
+    cursor: pointer;
+}
+.proAdd{
+  border: 2px solid #000;
+    padding: 5px 5px;
+    font-size: 14px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.custom-input2 {
+  width: 92%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  border-radius: 0px 25px 25px 0px;
+  transition: border-radius 0.3s ease;
+  margin-left: 30px;
+}
+
+.react-tel-input .form-control {
+  width: 100%;
+}
+.react-tel-input .flag-dropdown {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: fit-content !important;
+  padding: 21.2px 2px !important;
+  background-color: #ffffff !important;
+  border: 1px solid #cacaca !important;
+  border-right: none !important;
+  border-radius: 25px 0 0 25px!important;
+}
+
+.custom-input2:focus {
+  outline: none;
+  /* border: 1px solid #1b45bf; */
 }
 

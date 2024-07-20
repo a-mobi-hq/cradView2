@@ -1,0 +1,268 @@
+[
+    {
+        "subCategory": "Introduction",
+        "subCategoryName": "Introduction",
+        "order": 1,
+        "category": "BusinessCaseBuilder"
+    },
+    {
+        "subCategory": "OpportunityAnalysis",
+        "subCategoryName": "Opportunity Analysis",
+        "order": 2,
+        "category": "BusinessCaseBuilder"
+    },
+    {
+        "subCategory": "MarketAnalysis",
+        "subCategoryName": "Market Analysis",
+        "order": 3,
+        "category": "BusinessCaseBuilder"
+    },
+    {
+        "subCategory": "SolutionDescription",
+        "subCategoryName": "Solution Description",
+        "order": 4,
+        "category": "BusinessCaseBuilder"
+    },
+    {
+        "subCategory": "BenefitsAndValueProposition",
+        "subCategoryName": "Benefits And Value Proposition",
+        "order": 5,
+        "category": "BusinessCaseBuilder"
+    },
+    {
+        "subCategory": "CostAnalysis",
+        "subCategoryName": "Cost Analysis",
+        "order": 6,
+        "category": "BusinessCaseBuilder"
+    },
+    {
+        "subCategory": "RiskAndMitigationStrategies",
+        "subCategoryName": "Risk And Mitigation Strategies",
+        "order": 7,
+        "category": "BusinessCaseBuilder"
+    },
+    {
+        "subCategory": "CustomerSegments",
+        "subCategoryName": "Customer Segments",
+        "order": 1,
+        "category": "BusinessAnalysisPack"
+    },
+   
+    {
+        "subCategory": "CustomerNeedsAndPainPoints",
+        "subCategoryName": "Customer Needs And Pain Points",
+        "order": 2,
+        "category": "BusinessAnalysisPack"
+    },
+    {
+        "subCategory": "ExecutiveSummary",
+        "subCategoryName": "Executive Summary",
+        "order": 3,
+        "category": "BusinessAnalysisPack"
+    },
+    {
+        "subCategory": "ValuePropositionStatement",
+        "subCategoryName": "Value Proposition Statement",
+        "order": 1,
+        "category": "ValuePropositionPack"
+    },
+    {
+        "subCategory": "PointsOfDifferentiation",
+        "subCategoryName": "Points Of Differentiation",
+        "order": 2,
+        "category": "ValuePropositionPack"
+    },
+    {
+        "subCategory": "ProofPointsAndEvidence",
+        "subCategoryName": "Proof Points And Evidence",
+        "order": 3,
+        "category": "ValuePropositionPack"
+    },
+    {
+        "subCategory": "ValueDeliveryProcess",
+        "subCategoryName": "Value Delivery Process",
+        "order": 4,
+        "category": "ValuePropositionPack"
+    },
+    {
+        "subCategory": "ValueDeliveryProcess",
+        "subCategoryName": "Value Delivery Process",
+        "order": 5,
+        "category": "ValuePropositionPack"
+    },
+    {
+        "subCategory": "PriceAndPricingStrategy",
+        "subCategoryName": "Price And Pricing Strategy",
+        "order": 6,
+        "category": "ValuePropositionPack"
+    },
+    {
+        "subCategory": "ValueCommunicationPlan",
+        "subCategoryName": "Value Communication Plan",
+        "order": 7,
+        "category": "ValuePropositionPack"
+    },
+    {
+        "subCategory": "ValueCommunicationPlan",
+        "subCategoryName": "Value Communication Plan",
+        "order": 8,
+        "category": "ValuePropositionPack"
+    },
+    {
+        "subCategory": "FeedbackMechanism",
+        "subCategoryName": "Feedback Mechanism",
+        "order": 9,
+        "category": "ValuePropositionPack"
+    },
+    {
+        "subCategory": "Conclusion",
+        "subCategoryName": "Conclusion",
+        "order": 10,
+        "category": "ValuePropositionPack"
+    },
+    {
+        "subCategory": "IdentifyProjectObjectives",
+        "subCategoryName": "Identify Project Objectives",
+        "order": 1,
+        "category": "SuccessMatrix"
+    },
+    {
+        "subCategory": "DefineSuccessCriteria",
+        "subCategoryName": "Define Success Criteria",
+        "order": 2,
+        "category": "SuccessMatrix"
+    },
+    {
+        "subCategory": "AssignImportanceAndWeight",
+        "subCategoryName": "Assign Importance And Weight",
+        "order": 3,
+        "category": "SuccessMatrix"
+    },
+    {
+        "subCategory": "DefineMeasurementMethods",
+        "subCategoryName": "Define Measurement Methods",
+        "order": 4,
+        "category": "SuccessMatrix"
+    },
+    {
+        "subCategory": "EvaluateAndMonitorProgress",
+        "subCategoryName": "Evaluate And Monitor Progress",
+        "order": 5,
+        "category": "SuccessMatrix"
+    },
+    {
+        "subCategory": "CommunicateResults",
+        "subCategoryName": "Communicate Results",
+        "order": 6,
+        "category": "SuccessMatrix"
+    },
+    {
+        "subCategory": "IterateAndImprove",
+        "subCategoryName": "Iterate And Improve",
+        "order": 7,
+        "category": "SuccessMatrix"
+    },
+    {
+        "subCategory": "MarketAnalysis",
+        "subCategoryName": "Market Analysis",
+        "order": 1,
+        "category": "DetailedMarketingStrategies"
+    },
+    {
+        "subCategory": "MarketingObjectives",
+        "subCategoryName": "Marketing Objectives",
+        "order": 2,
+        "category": "DetailedMarketingStrategies"
+    },
+    {
+        "subCategory": "PositioningAndMessaging",
+        "subCategoryName": "Positioning And Messaging",
+        "order": 3,
+        "category": "DetailedMarketingStrategies"
+    },
+    {
+        "subCategory": "MarketingMix(4Ps)",
+        "subCategoryName": "Marketing Mix (4Ps)",
+        "order": 4,
+        "category": "DetailedMarketingStrategies"
+    },
+    {
+        "subCategory": "MarketingChannels",
+        "subCategoryName": "Marketing Channels",
+        "order": 5,
+        "category": "DetailedMarketingStrategies"
+    },
+    {
+        "subCategory": "MarketingTacticsAndCampaigns",
+        "subCategoryName": "Marketing Tactics And Campaigns",
+        "order": 6,
+        "category": "DetailedMarketingStrategies"
+    },
+    {
+        "subCategory": "BudgetAllocation",
+        "subCategoryName": "Budget Allocation",
+        "order": 7,
+        "category": "DetailedMarketingStrategies"
+    },
+    {
+        "subCategory": "ImplementationPlan",
+        "subCategoryName": "Implementation Plan",
+        "order": 8,
+        "category": "DetailedMarketingStrategies"
+    },
+    {
+        "subCategory": "RiskManagement",
+        "subCategoryName": "Risk Management",
+        "order": 9,
+        "category": "DetailedMarketingStrategies"
+    },
+    {
+        "subCategory": "ReviewAndOptimisation",
+        "subCategoryName": "Review And Optimisation",
+        "order": 10,
+        "category": "DetailedMarketingStrategies"
+    },
+    {
+        "subCategory": "DomainName",
+        "subCategoryName": "Domain Name",
+        "order": 1,
+        "category": "DomainName"
+    },
+    {
+        "subCategory": "TrademarkOrCopyright",
+        "subCategoryName": "Trademark Or Copyright",
+        "order": 1,
+        "category": "TrademarkOrCopyright"
+    },
+    {
+        "subCategory": "Patent",
+        "subCategoryName": "Patent",
+        "order": 1,
+        "category": "Patent"
+    },
+    {
+        "subCategory": "StakeholdersEngagement",
+        "subCategoryName": "Stakeholders Engagement",
+        "order": 1,
+        "category": "StakeholdersEngagement"
+    },
+    {
+        "subCategory": "FullProductOrProjectReview",
+        "subCategoryName": "Full Product Or Project Review",
+        "order": 1,
+        "category": "FullProductOrProjectReview"
+    },
+    {
+        "subCategory": "BringTheMVPToFullScale",
+        "subCategoryName": "Bring The MVP To Full Scale",
+        "order": 1,
+        "category": "BringTheMVPToFullScale"
+    },
+    {
+        "subCategory": "ExecuteTheMarketingAndRouteToMarketStrategies",
+        "subCategoryName": "Execute Marketing",
+        "order": 1,
+        "category": "ExecuteTheMarketingAndRouteToMarketStrategies"
+    }
+]
+

@@ -180,7 +180,7 @@ import NetGraph from './netGraph';
 import ExpensesYoY from './exepensesYoY';
 import SectionExe from './sectionExecute';
 import PageShare from './pageShare';
-import CustomerInflux from './cutomerInflux';
+import CustomerInflux from './customerInflux';
 import SendFile from './sendFile';
 import Expenses from './expenses';
 import InflationYoY from './inflationYoY';
@@ -231,16 +231,32 @@ import ScrapCreateName from './scrapCreateName';
 import ScrapView from './scrapView';
 import CreateKpi from './kpiCreate';
 import EditKpi from './kpiEdith';
+import ViewExpensesGraph from './expensesGraphView';
 import ViewInflation from './inflationRateGraphView';
+import ViewNetProfitGraph from './netProfitGraphView';
 import CreateInflation from './inflationRateCreate';
+import CreateOperatingIncome from './operatingIncomeCreate';
+import CreateExpenses from './expensesCreate';
+import CreateNetProfit from './netProfitCreate';
+import CreateCustomerGrowth from './customerGrowthCreate';
+import CreateCustomerInflux from './customerInfluxCreate';
 import ViewImage from './viewImages';
 import ViewImageMenu from './viewImagesMenu';
 import Start from './start';
 import Upload from './upload';
 import CustomFinancial from './customFinancial';
 import Inflation from './inflationRate';
+import NetProfit from './netProfit';
 import ViewInflationGraph from './inflationRateGraphView';
+import ViewOperatingIncomeGraph from './operatingIncomeGraphView';
+import ViewCustomerGrowthGraph from './customerGrowthGraphView';
+import ViewCustomerInfluxGraph from './customerInfluxGraphView';
 import EditInflation from './inflationRateEdit';
+import EditOperatingIncome from './operatingIncomeEdit';
+import EditExpenses from './expensesEdit';
+import EditNetProfit from './netProfitEdit';
+import EditCustomerGrowth from './customerGrowthEdit';
+import EditCustomerInflux from './customerInfluxEdit';
 import TimelineView from './timelineView';
 import PitchDeckStart from './pitchDeckStart';
 import CreateTask from './taskCreate';
@@ -267,8 +283,8 @@ function App() {
         <Route path="/pitchDeckUpload" element= {<PitchDeckUpload />} />
         <Route path="/pitchDeckView" element= {<PitchDeckView />} />
         <Route path="/questionBus" element= {<QuestionBus />} />
-        <Route path="/questionBusMain" element= {<QuestionBusMain />} />
-        <Route path="/questionBusMainSum/:category/:subCategory" element= {<QuestionBusMainSum />} />
+        <Route path="/questionBusMain/:phase/:category" element= {<QuestionBusMain />} />
+        <Route path="/questionBusMainSum/:phase/:category/:subCategory" element= {<QuestionBusMainSum />} />
         <Route path="/questionBusCo" element= {<QuestionBusCo />} />
         <Route path="/questionBusOp" element= {<QuestionBusOp />} />
         <Route path="/questionBusMa" element= {<QuestionBusMa />} />
@@ -399,7 +415,7 @@ function App() {
         <Route path="/expensesMoM" element= {<ExpensesMonthOnMonth />} />
         <Route path="/inflationMoM" element= {<InflationMonthOnMonth />} />
         <Route path="/customerGrowth" element= {<CustomerGrowth />} />
-        <Route path="/cutomerinflux" element= {<CustomerInflux />} />
+        <Route path="/customerInflux" element= {<CustomerInflux />} />
         <Route path="/profitPage" element= {<ProfitPage />} />
         <Route path="/expenses" element= {<Expenses />} />
         <Route path="/inflationAnalysis" element= {<InflationAnalysis />} />
@@ -416,6 +432,7 @@ function App() {
         <Route path="/chatTool" element= {<ChatTools />} />
         <Route path="/giveFeedbackModal" element= {<GiveFeedbackModal />} />
         <Route path="/welcome" element= {<Welcome />} />
+        <Route path="/netProfit" element= {<NetProfit />} />
         <Route path="/operatingIncome" element= {<OperatingIncome />} />
         <Route path="/password" element= {<Password />} />
         <Route path="/deleteModal" element= {<DeleteModal />} />
@@ -474,7 +491,7 @@ function App() {
         <Route path="/conclusion" element={<Conclusion />} />
         <Route path="costPage" element={<PageCost />} />
         <Route path="/home" element= {<LandingPage />} />
-        <Route path="/go" element= {<GoPage />} />
+        <Route path="/go/:phase" element= {<GoPage />} />
         {/* <Route path="/login" element= {<Login />} /> */}
         <Route path="/loading" element= {<LoadingPage />} />
         <Route path="/createProject" element= {<CreateProject />} />
@@ -506,8 +523,23 @@ function App() {
             <Route path="/customFinancial/" element= {<CustomFinancial />} />
             <Route path="/inflation/" element= {<Inflation />} />
             <Route path="/inflationCreate/" element= {<CreateInflation />} />
+            <Route path="/operatingIncomeCreate/" element= {<CreateOperatingIncome />} />
+            <Route path="/expensesCreate/" element= {<CreateExpenses />} />
+            <Route path="/netProfitCreate/" element= {<CreateNetProfit />} />
+            <Route path="/customerGrowthCreate/" element= {<CreateCustomerGrowth />} />
+            <Route path="/customerInfluxCreate/" element= {<CreateCustomerInflux />} />
+            <Route path="/expensesGraphView/:id" element= {<ViewExpensesGraph />} />
             <Route path="/inflationGraphView/:id" element= {<ViewInflationGraph />} />
+            <Route path="/operatingIncomeGraphView/:id" element= {<ViewOperatingIncomeGraph />} />
+            <Route path="/netProfitGraphView/:id" element= {<ViewNetProfitGraph />} />
+            <Route path="/customerGrowthGraphView/:id" element= {<ViewCustomerGrowthGraph />} />
+            <Route path="/customerInfluxGraphView/:id" element= {<ViewCustomerInfluxGraph />} />
             <Route path="/inflationEdit/:id" element= {<EditInflation />} />
+            <Route path="/operatingIncomeEdit/:id" element= {<EditOperatingIncome />} />
+            <Route path="/netProfitEdit/:id" element= {<EditNetProfit />} />
+            <Route path="/expensesEdit/:id" element= {<EditExpenses />} />
+            <Route path="/customerGrowthEdit/:id" element= {<EditCustomerGrowth />} />
+            <Route path="/customerInfluxEdit/:id" element= {<EditCustomerInflux />} />
             <Route path="/timelineView/" element= {<TimelineView />} />
             <Route path="/pitchDeckStart/" element= {<PitchDeckStart />} />
             <Route path="/createTask/" element= {<CreateTask />} />

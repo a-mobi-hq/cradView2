@@ -6,17 +6,22 @@ import p4 from './../images/p4.jpeg';
 import p5 from './../images/p5.jpeg';
 import p6 from './../images/p6.jpeg';
 import bbm from './../images/bggm.webp';
+import bolt from './../images/bolt2.webp';
 import { CiBellOn ,CiUser, CiChat2} from 'react-icons/ci';
+import { MdOutlineBolt} from 'react-icons/md';
 import ChatToolModal from './chatToolModal';
 import API_BASE_URL from '../config/apiConfig';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLightbulb, faTrash  } from '@fortawesome/free-solid-svg-icons';
 import { checkTokenValidity } from '../util/auth';
+import axios from 'axios';
+import { jwtDecode } from "jwt-decode";
 
 const Header = () => {
     const projectId = localStorage.getItem('nProject');
     const [isOpen, setIsOpen]= useState(false);
     const [projectName, setProjectName] = useState('');
+    const [streak, setStreak] = useState('0');
     useEffect(() => {
         const { isValid, expired } = checkTokenValidity();
     
@@ -47,6 +52,28 @@ const Header = () => {
         }
       };
   
+      const updateStreak = async () => {
+        try {
+         const projectId = localStorage.getItem('nProject');
+          const token = localStorage.getItem('access_token'); 
+        const decodedToken = jwtDecode(token);
+        const userId = decodedToken.userId;
+    
+          const response = await axios.post(API_BASE_URL+'/api/streak/', { userId,projectId });
+          console.log(response);
+          console.log(response.data.streak);
+          setStreak(response.data.streak);
+    
+          // setStreak(response.data.streak);
+          // setLoading(false);
+        } catch (error) {
+          console.log(error.response)
+        }
+      };
+     
+      useEffect(() => {
+        updateStreak();
+      }, []);
 
   useEffect(() => {
     
@@ -135,6 +162,9 @@ const handleNotifyClick1 = () => {
                 <div className='fll'>
                     {/* <span className='iconS2 mr'><CiBellOn /></span> */}
                     <div ref={dropdownRef} className="dropdown5 iconS2 mr">
+                <div className={`select0 `}>
+                 <span classname="selected" style={{color:"#fff"}}><MdOutlineBolt /><span className='streakTop'>{streak}</span></span>
+                </div>
                 <div className={`select0 ${isDropdownOpen ? 'select-clicked' : ''}`} onClick={toggleDropdown}>
                     <span classname="selected" style={{color:"#fff"}}>{selectedOption || <CiBellOn />}</span>
                 </div>

@@ -17,21 +17,14 @@ const SideMenu2 = () => {
   
   const navigate = useNavigate();
 
-  const onClickCB = () => navigate(`/questionBusMain/ProductDefinition/BusinessAnalysisPack`);
+  const onClickCB = () => navigate(`/questionBusMain/InitialDesign/DomainName`);
 
-  const onClickCV = () => navigate(`/questionBusMain/ProductDefinition/ValuePropositionPack`);
+  const onClickCV = () => navigate(`/questionBusMain/InitialDesign/TrademarkOrCopyright`);
 
-  const onClickS = () => navigate(`/questionBusMain/ProductDefinition/SuccessMatrix`);
-
-  const onClickD = () => navigate(`/questionBusMain/ProductDefinition/DetailedMarketingStrategies`);
-
-  const onClickB = () => navigate(`/branding`);
-  const onClickT = () => navigate(`/teamView`);
-
-
-  const onClickCG = () => navigate(`/go/ProductDefinition`);
+  const onClickD = () => navigate(`/questionBusMain/InitialDesign/StakeholdersEngagement`);
 
   const onClickCH = () => navigate(`/start`);
+  const onClickCG = () => navigate(`/go/InitialDesign`);
 
 
 
@@ -54,7 +47,7 @@ const SideMenu2 = () => {
       <ul>
       {!isCollapsed && (
         <div className='text-center'>
-            <span className='menuHeader'>Product Definition</span>
+            <span className='menuHeader'>Initial Design</span>
         </div>
        )}
 
@@ -65,54 +58,31 @@ const SideMenu2 = () => {
 
         <li onClick={onClickCB}> 
           <CiBoxes />
-          {!isCollapsed && <span>Business Analysis Pack</span>}
-        </li>
-        <li onClick={onClickCV}>
-            <CiCalculator1 />
-          
-          {!isCollapsed && <span>Value Proposition Pack (VPP)</span>}
+          {!isCollapsed && <span>Domain Name</span>}
         </li>
 
-        <li onClick={onClickS}>
-            <CiCalculator1 />
-          
-          {!isCollapsed && <span>Success Matrix</span>}
-        </li>
-
-        <li onClick={onClickT}>
-            <CiCalculator1 />
-          
-          {!isCollapsed && <span>Getting Your Team</span>}
-        </li>
+      
 
         <li onClick={onClickD}>
             <CiCalculator1 />
           
-          {!isCollapsed && <span>Detailed Marketing Strategies</span>}
+          {!isCollapsed && <span>Stakeholders Engagement</span>}
         </li>
 
-        <li onClick={onClickB}>
+        <li>
             <CiCalculator1 />
           
-          {!isCollapsed && <span>Branding</span>}
+          {!isCollapsed && <span>Summary Pdf</span>}
         </li>
+
 
         <li onClick={onClickCG}>
         <CiGrid2V />
           {!isCollapsed && <span>Go no Go</span>}
         </li>
 
-        {/* <li>
-
-          <CiViewTimeline />
-          {!isCollapsed && <span>Timeline Builder</span>}
-        </li> */}
-        
-        <li>
-            <CiServer />
-          {!isCollapsed && <span>Summary Pdf</span>}
-        </li>
-
+      
+       
         {!isCollapsed && (
         <div className='text-center'>
             <hr className='buiy'></hr>

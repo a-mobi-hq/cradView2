@@ -17,7 +17,7 @@ import graph3 from './images/graph3.png'
 import graph4 from './images/graph4.png'
 import graph5 from './images/graph5.png'
 
-function CustomerGrowth() {
+function CustomerInflux() {
 
     const navigate = useNavigate();
     const access_token = localStorage.getItem('access_token');
@@ -30,15 +30,15 @@ function CustomerGrowth() {
     const [graphData, setGraphData] = useState([]);
     const [selectedGraphData, setSelectedGraphData] = useState(null);
     const [selectedGraphId, setSelectedGraphId] = useState('');
-    const graphType = "CustomerGrowth";
+    const graphType = "CustomerInflux";
 
     const handleViewClick = (id) => {
-        navigate(`/customerGrowthGraphView/${id}`); // Navigate to the view page with the ID as a parameter
+        navigate(`/customerInfluxGraphView/${id}`); // Navigate to the view page with the ID as a parameter
       };
 
 
       const handleEditClick = (id) => {
-        navigate(`/customerGrowthEdit/${id}`); // Navigate to the view page with the ID as a parameter
+        navigate(`/customerInfluxEdit/${id}`); // Navigate to the view page with the ID as a parameter
       };
 
       const handleDeleteClick = (id) => {
@@ -122,7 +122,7 @@ function CustomerGrowth() {
       
         return `${time}`;
       };
-      const onClickHandler = () => navigate(`/customerGrowthCreate`);
+      const onClickHandler = () => navigate(`/CustomerInfluxCreate`);
       return (
 
        
@@ -137,7 +137,7 @@ function CustomerGrowth() {
          <div className='main-content2' style={{paddingLeft:40, paddingRight:40}}>
 
          <div className='text-center'>
-                    <p className='textHp'>Company Growth</p>
+                    <p className='textHp'>Customer Influx</p>
                     <p className='textH'>You will need a Profesional</p>
                 </div>
             
@@ -145,7 +145,7 @@ function CustomerGrowth() {
        
                 <div className="row">
             <div className="col-md-6">
-                <p style={{fontWeight:700}}>Company Growth</p>
+                <p style={{fontWeight:700}}>Customer Influx</p>
             </div>
 
             <div className="col-md-6">
@@ -196,4 +196,4 @@ function CustomerGrowth() {
 
 
 
-  export default CustomerGrowth;
+  export default CustomerInflux;

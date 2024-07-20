@@ -1,0 +1,99 @@
+[
+    {
+        "goGate": "BusinessCaseBuilder",
+        "goGateName": "Business Case Builder",
+        "phase": "Ideation",
+        "order": 1
+    },
+    {
+        "goGate": "CustomFinancialProjection",
+        "goGateName": "Custom Financial Projection",
+        "phase": "Ideation",
+        "order": 2
+    },
+    {
+        "goGate": "Summary Pdf",
+        "goGateName": "Summary Pdf",
+        "phase": "Ideation",
+        "order": 3
+    },
+    {
+        "goGate": "BusinessAnalysisPack",
+        "goGateName": "Business Analysis Pack",
+        "phase": "ProductDefinition",
+        "order": 1
+    },
+    {
+        "goGate": "ValuePropositionPack",
+        "goGateName": "Value Proposition Pack",
+        "phase": "ProductDefinition",
+        "order": 2
+    },
+    {
+        "goGate": "SuccessMatrix",
+        "goGateName": "Success Matrix",
+        "phase": "ProductDefinition",
+        "order": 3
+    },
+    {
+        "goGate": "DetailedMarketingStrategies",
+        "goGateName": "Detailed Marketing Strategies",
+        "phase": "ProductDefinition",
+        "order": 4
+    },
+    {
+        "goGate": "Branding",
+        "goGateName": "Branding",
+        "phase": "ProductDefinition",
+        "order": 5
+    },
+    {
+        "goGate": "SummaryPdf",
+        "goGateName": "Summary Pdf",
+        "phase": "ProductDefinition",
+        "order": 6
+    },
+    {
+        "goGate": "ClaimDomain",
+        "goGateName": "Claim Domain",
+        "phase": "InitialDesign",
+        "order": 1
+    },
+    {
+        "goGate": "StakeholderEngagement",
+        "goGateName": "Stakeholder Engagement",
+        "phase": "InitialDesign",
+        "order": 2
+    },
+    {
+        "goGate": "SummaryPdf",
+        "goGateName": "Summary Pdf",
+        "phase": "InitialDesign",
+        "order": 3
+    },
+    {
+        "goGate": "Detail Marketing/ RTM Tracking",
+        "goGateName": "DetailMarketingRTMTracking",
+        "phase": "ValidatingAndTesting",
+        "order": 1
+    },
+    {
+        "goGate": "SummaryPdf",
+        "goGateName": "Summary Pdf",
+        "phase": "ValidatingAndTesting",
+        "order": 2
+    },
+    {
+        "goGate": "MVPToFullScale",
+        "goGateName": "MVP To Full Scale",
+        "phase": "Commercialization",
+        "order": 1
+    },
+    {
+        "goGate": "ExecuteRTM",
+        "goGateName": "Execute RTM",
+        "phase": "Commercialization",
+        "order": 2
+    }
+]
+

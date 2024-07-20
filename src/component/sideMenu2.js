@@ -18,9 +18,9 @@ const SideMenu2 = () => {
   const navigate = useNavigate();
   const onClickCF = () => navigate(`/customFinancial`);
 
-  const onClickCB = () => navigate(`/questionBus`);
+  const onClickCB = () => navigate(`/questionBusMain/Ideation/BusinessCaseBuilder`);
 
-  const onClickCG = () => navigate(`/go`);
+  const onClickCG = () => navigate(`/go/Ideation`);
 
   const onClickCH = () => navigate(`/start`);
 
