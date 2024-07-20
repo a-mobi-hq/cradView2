@@ -24,6 +24,7 @@ function InflationRateGraph({projectId, graphType }) {
     
 
     const [streak, setStreak] = useState('');
+    const [timelineCount, setTimelineCount] = useState('');
     const [selectedGraphData, setSelectedGraphData] = useState(null);
     const [selectedGraphId, setSelectedGraphId] = useState('');
     
@@ -36,9 +37,13 @@ function InflationRateGraph({projectId, graphType }) {
 
     const navigate = useNavigate();
 
+    const token = localStorage.getItem('access_token'); 
+    const decodedToken = jwtDecode(token);
+    const userId = decodedToken.userId;
+
   const handleClickB = () => {
     localStorage.setItem('selectedCase', 'BusinessCaseBuilder');
-    navigate('/questionBus');
+    navigate('/questionBusMain/Ideation/BusinessCaseBuilder');
   };
 
   const handleClickTi = () => {
@@ -56,7 +61,14 @@ function InflationRateGraph({projectId, graphType }) {
   };
 
   const handleClickI = () => {
-    navigate('/questionBapEs');
+    navigate('/questionBusMain/ProductDefinition/BusinessAnalysisPack');
+  };
+
+  const handleClickID = () => {
+    navigate('/questionBusMain/InitialDesign/DomainName');
+  };
+  const handleClickCO = () => {
+    navigate('/questionBusMain/Commercialization/BringTheMVPToFullScale');
   };
 
   const handleClickCh = () => {
@@ -140,6 +152,24 @@ function InflationRateGraph({projectId, graphType }) {
     }, [projectId]);
 
 
+    useEffect(() => {
+        const fetchTimelinesCount = async () => {
+          try {
+              const projectId = localStorage.getItem('nProject');
+            const response = await axios.get(API_BASE_URL+`/api/timeline/count/projects/${userId}/${projectId}`);
+            console.log(response);
+            setTimelineCount(response.data);
+            setLoading(false);
+          } catch (error) {
+            setError(error);
+            setLoading(false);
+          }
+        };
+    
+        fetchTimelinesCount();
+      }, [projectId]);
+
+
       return (
 
        
@@ -199,7 +229,7 @@ function InflationRateGraph({projectId, graphType }) {
                
 
                 <div className="col-md-3">
-                    <div className="caseBA3">
+                    <div className="caseBA3" onClick={handleClickID}>
                         <p className="caseBA3PV">View</p>
                         <p className="caseBA3P">Initial Design</p>
                         <p className="caseBA3P2">Plan design and add memebers to Team</p>
@@ -219,9 +249,8 @@ function InflationRateGraph({projectId, graphType }) {
                     </div>
                 </div>
 
-
                 <div className="col-md-3">
-                    <div className="caseBA2">
+                    <div className="caseBA2" onClick={handleClickCO}>
                         <p className="caseBA2PV">View</p>
                         <p className="caseBA2P">Commercialization</p>
                         <p className="caseBA2P2">Get your product ready to launch for production</p>
@@ -290,14 +319,15 @@ function InflationRateGraph({projectId, graphType }) {
                             <p className="ttas">Total Task</p>
                             <div className="row">
                                 <div className="col-md-3">
-                                    <p>3</p>
+                                <p>{timelineCount !== '' ? timelineCount : 0}</p>
                                 </div>
 
                                 <div className="col-md-9">
+                                {timelineCount !== '' && (
                                     <div className="upgi" onClick={handleClickUp}>
-                                        <p style={{marginBottom:0, color:"#fff"}}>Upload Files</p>
-                                        
+                                    <p style={{marginBottom:0, color:"#fff"}}>Upload Files</p>
                                     </div>
+                                )}
                                 </div>
                                 
                             </div>

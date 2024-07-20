@@ -7,6 +7,9 @@ import { Toaster, toast } from 'sonner'
 import API_BASE_URL from './config/apiConfig';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
+
 function SignUp() {
 
 
@@ -26,7 +29,9 @@ function SignUp() {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
     const onClickHandler = () => navigate(`/login`)
-
+    const handlePhoneChange = (value) => {
+      setFormData({ ...formData, phoneNumber: value });
+    };
 
     //Register
 
@@ -148,12 +153,16 @@ function SignUp() {
 
 
                 <label htmlFor="phone" className='lab'>Phone Number</label>
-                <input
-                  type="tel"
-                  id="phoneNumber"
+                <PhoneInput
+                  country={'ng'}
                   value={formData.phoneNumber}
-                  onChange={handleChange}
-                  className="custom-input"
+                  onChange={handlePhoneChange}
+                  inputProps={{
+                    name: 'phoneNumber',
+                    required: true,
+                    autoFocus: true,
+                    className: 'custom-input2'
+                  }}
                 />
 
                 <label htmlFor="password" className='lab'>Password</label>
